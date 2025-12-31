@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "paths": {
+      "@duskmoon-dev/el-core": ["./packages/core/src/index.ts"],
+      "@duskmoon-dev/el-button": ["./elements/button/src/index.ts"],
+      "@duskmoon-dev/el-card": ["./elements/card/src/index.ts"],
+      "@duskmoon-dev/el-input": ["./elements/input/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "dist", "*.test.ts"]
+}

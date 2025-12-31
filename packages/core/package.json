@@ -1,0 +1,31 @@
+{
+  "name": "@duskmoon-dev/el-core",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist", "src"],
+  "scripts": {
+    "build": "bun run build:js && bun run build:types",
+    "build:js": "bun build ./src/index.ts --outdir ./dist --format esm --sourcemap",
+    "build:types": "tsc --emitDeclarationOnly --outDir dist",
+    "dev": "bun build ./src/index.ts --outdir ./dist --format esm --sourcemap --watch",
+    "clean": "rm -rf dist",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

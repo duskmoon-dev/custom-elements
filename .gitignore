@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+
+# Lock files (using bun.lockb)
+yarn.lock
+package-lock.json
+bun.lock
+
+# Build outputs
+dist/
+*.tsbuildinfo
+*.tgz
+
+# Generated declaration files in src (should be in dist)
+src/**/*.d.ts
+src/**/*.d.ts.map
+
+# Test & Coverage
+coverage/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+.logs
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# SvelteKit
+.svelte-kit
+
+# Devenv
+/.devenv*
+/.direnv
