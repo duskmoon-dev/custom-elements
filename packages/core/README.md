@@ -33,7 +33,7 @@ const styles = css`
 
 class MyGreeting extends BaseElement {
   static properties = {
-    name: { type: String, reflect: true, default: 'World' }
+    name: { type: String, reflect: true, default: 'World' },
   };
 
   declare name: string;
@@ -89,7 +89,7 @@ import { cssVars } from '@duskmoon-dev/el-core';
 
 const vars = cssVars({
   'dm-primary': '#3b82f6',
-  'dm-spacing': '1rem'
+  'dm-spacing': '1rem',
 });
 // Returns: '--dm-primary: #3b82f6; --dm-spacing: 1rem;'
 ```
@@ -110,14 +110,14 @@ The package includes default CSS custom properties for theming:
 
 ### BaseElement
 
-| Method | Description |
-|--------|-------------|
-| `attachStyles(styles)` | Attach stylesheets to Shadow DOM |
-| `render()` | Override to return HTML content |
-| `update()` | Called when element should update |
-| `emit(name, detail?)` | Emit a custom event |
-| `query(selector)` | Query element in Shadow DOM |
-| `queryAll(selector)` | Query all elements in Shadow DOM |
+| Method                 | Description                       |
+| ---------------------- | --------------------------------- |
+| `attachStyles(styles)` | Attach stylesheets to Shadow DOM  |
+| `render()`             | Override to return HTML content   |
+| `update()`             | Called when element should update |
+| `emit(name, detail?)`  | Emit a custom event               |
+| `query(selector)`      | Query element in Shadow DOM       |
+| `queryAll(selector)`   | Query all elements in Shadow DOM  |
 
 ### Property Definitions
 

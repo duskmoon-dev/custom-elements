@@ -24,10 +24,7 @@ const styleSheetCache = new WeakMap<TemplateStringsArray, CSSStyleSheet>();
  * @param values - Interpolated values
  * @returns A CSSStyleSheet instance
  */
-export function css(
-  strings: TemplateStringsArray,
-  ...values: (string | number)[]
-): CSSStyleSheet {
+export function css(strings: TemplateStringsArray, ...values: (string | number)[]): CSSStyleSheet {
   // Check cache first
   const cached = styleSheetCache.get(strings);
   if (cached && values.length === 0) {

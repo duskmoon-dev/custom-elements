@@ -12,13 +12,13 @@ A collection of customizable web components built with vanilla JavaScript and Sh
 
 ## Packages
 
-| Package | Description | Version |
-|---------|-------------|---------|
-| [@duskmoon-dev/el-core](./packages/core) | Core utilities and base classes | 0.0.1 |
-| [@duskmoon-dev/el-button](./elements/button) | Button component | 0.0.1 |
-| [@duskmoon-dev/el-card](./elements/card) | Card container component | 0.0.1 |
-| [@duskmoon-dev/el-input](./elements/input) | Text input component | 0.0.1 |
-| [@duskmoon-dev/el-markdown](./elements/markdown) | Markdown renderer component | 0.0.1 |
+| Package                                          | Description                     | Version |
+| ------------------------------------------------ | ------------------------------- | ------- |
+| [@duskmoon-dev/el-core](./packages/core)         | Core utilities and base classes | 0.0.1   |
+| [@duskmoon-dev/el-button](./elements/button)     | Button component                | 0.0.1   |
+| [@duskmoon-dev/el-card](./elements/card)         | Card container component        | 0.0.1   |
+| [@duskmoon-dev/el-input](./elements/input)       | Text input component            | 0.0.1   |
+| [@duskmoon-dev/el-markdown](./elements/markdown) | Markdown renderer component     | 0.0.1   |
 
 ## Installation
 
@@ -34,7 +34,7 @@ bun add @duskmoon-dev/el-core
 
 ```html
 <script type="module">
-  import { register } from '@duskmoon-dev/el-button';
+  import { register } from "@duskmoon-dev/el-button";
   register();
 </script>
 
@@ -66,25 +66,18 @@ bun add @duskmoon-dev/el-core
 ### Input (`<el-dm-input>`)
 
 ```html
-<el-dm-input
-  label="Email"
-  type="email"
-  placeholder="you@example.com"
-  required
-></el-dm-input>
+<el-dm-input label="Email" type="email" placeholder="you@example.com" required></el-dm-input>
 ```
 
 ### Markdown (`<el-dm-markdown>`)
 
-```html
+````html
 <el-dm-markdown>
-  # Hello Markdown!
+  # Hello Markdown! This is **bold** and *italic* text. ```javascript console.log('Syntax
+  highlighting!');</el-dm-markdown
+>
+````
 
-  This is **bold** and *italic* text.
-
-  ```javascript
-  console.log('Syntax highlighting!');
-  ```
 </el-dm-markdown>
 ```
 
@@ -103,7 +96,7 @@ All elements use CSS custom properties for styling. Override these in your CSS:
   --dm-secondary: #64748b;
 
   /* Typography */
-  --dm-font-family: 'Inter', system-ui, sans-serif;
+  --dm-font-family: "Inter", system-ui, sans-serif;
 
   /* Spacing */
   --dm-spacing-md: 1rem;
@@ -176,7 +169,7 @@ mkdir -p elements/my-element/src
 3. Create the element class extending `BaseElement`:
 
 ```typescript
-import { BaseElement, css } from '@duskmoon-dev/el-core';
+import { BaseElement, css } from "@duskmoon-dev/el-core";
 
 const styles = css`
   :host {
@@ -200,8 +193,8 @@ export class ElDmMyElement extends BaseElement {
 }
 
 export function register() {
-  if (!customElements.get('el-dm-my-element')) {
-    customElements.define('el-dm-my-element', ElDmMyElement);
+  if (!customElements.get("el-dm-my-element")) {
+    customElements.define("el-dm-my-element", ElDmMyElement);
   }
 }
 ```

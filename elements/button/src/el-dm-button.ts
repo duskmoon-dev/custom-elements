@@ -74,115 +74,115 @@ const styles = css`
   }
 
   /* Size variants */
-  :host([size="xs"]) button {
+  :host([size='xs']) button {
     padding: var(--dm-button-padding-y, 0.25rem) var(--dm-button-padding-x, 0.5rem);
     font-size: var(--dm-button-font-size, var(--dm-font-size-xs, 0.75rem));
     gap: var(--dm-spacing-xs, 0.25rem);
   }
 
-  :host([size="sm"]) button {
+  :host([size='sm']) button {
     padding: var(--dm-button-padding-y, 0.375rem) var(--dm-button-padding-x, 0.75rem);
     font-size: var(--dm-button-font-size, var(--dm-font-size-sm, 0.875rem));
   }
 
   :host(:not([size])) button,
-  :host([size="md"]) button {
+  :host([size='md']) button {
     padding: var(--dm-button-padding-y, 0.5rem) var(--dm-button-padding-x, 1rem);
     font-size: var(--dm-button-font-size, var(--dm-font-size-md, 1rem));
   }
 
-  :host([size="lg"]) button {
+  :host([size='lg']) button {
     padding: var(--dm-button-padding-y, 0.625rem) var(--dm-button-padding-x, 1.25rem);
     font-size: var(--dm-button-font-size, var(--dm-font-size-lg, 1.125rem));
   }
 
-  :host([size="xl"]) button {
+  :host([size='xl']) button {
     padding: var(--dm-button-padding-y, 0.75rem) var(--dm-button-padding-x, 1.5rem);
     font-size: var(--dm-button-font-size, var(--dm-font-size-xl, 1.25rem));
   }
 
   /* Primary variant (default) */
   :host(:not([variant])) button,
-  :host([variant="primary"]) button {
+  :host([variant='primary']) button {
     background-color: var(--dm-primary, #3b82f6);
     color: white;
     border-color: var(--dm-primary, #3b82f6);
   }
 
   :host(:not([variant])) button:hover:not(:disabled),
-  :host([variant="primary"]) button:hover:not(:disabled) {
+  :host([variant='primary']) button:hover:not(:disabled) {
     background-color: var(--dm-primary-hover, #2563eb);
     border-color: var(--dm-primary-hover, #2563eb);
   }
 
   :host(:not([variant])) button:active:not(:disabled),
-  :host([variant="primary"]) button:active:not(:disabled) {
+  :host([variant='primary']) button:active:not(:disabled) {
     background-color: var(--dm-primary-active, #1d4ed8);
     border-color: var(--dm-primary-active, #1d4ed8);
   }
 
   /* Secondary variant */
-  :host([variant="secondary"]) button {
+  :host([variant='secondary']) button {
     background-color: var(--dm-secondary, #6b7280);
     color: white;
     border-color: var(--dm-secondary, #6b7280);
   }
 
-  :host([variant="secondary"]) button:hover:not(:disabled) {
+  :host([variant='secondary']) button:hover:not(:disabled) {
     background-color: var(--dm-secondary-hover, #4b5563);
     border-color: var(--dm-secondary-hover, #4b5563);
   }
 
-  :host([variant="secondary"]) button:active:not(:disabled) {
+  :host([variant='secondary']) button:active:not(:disabled) {
     background-color: var(--dm-secondary-active, #374151);
     border-color: var(--dm-secondary-active, #374151);
   }
 
   /* Tertiary variant */
-  :host([variant="tertiary"]) button {
+  :host([variant='tertiary']) button {
     background-color: var(--dm-gray-100, #f3f4f6);
     color: var(--dm-gray-800, #1f2937);
     border-color: var(--dm-gray-100, #f3f4f6);
   }
 
-  :host([variant="tertiary"]) button:hover:not(:disabled) {
+  :host([variant='tertiary']) button:hover:not(:disabled) {
     background-color: var(--dm-gray-200, #e5e7eb);
     border-color: var(--dm-gray-200, #e5e7eb);
   }
 
-  :host([variant="tertiary"]) button:active:not(:disabled) {
+  :host([variant='tertiary']) button:active:not(:disabled) {
     background-color: var(--dm-gray-300, #d1d5db);
     border-color: var(--dm-gray-300, #d1d5db);
   }
 
   /* Ghost variant */
-  :host([variant="ghost"]) button {
+  :host([variant='ghost']) button {
     background-color: transparent;
     color: var(--dm-primary, #3b82f6);
     border-color: transparent;
   }
 
-  :host([variant="ghost"]) button:hover:not(:disabled) {
+  :host([variant='ghost']) button:hover:not(:disabled) {
     background-color: var(--dm-gray-100, #f3f4f6);
   }
 
-  :host([variant="ghost"]) button:active:not(:disabled) {
+  :host([variant='ghost']) button:active:not(:disabled) {
     background-color: var(--dm-gray-200, #e5e7eb);
   }
 
   /* Outline variant */
-  :host([variant="outline"]) button {
+  :host([variant='outline']) button {
     background-color: transparent;
     color: var(--dm-primary, #3b82f6);
     border-color: var(--dm-primary, #3b82f6);
   }
 
-  :host([variant="outline"]) button:hover:not(:disabled) {
+  :host([variant='outline']) button:hover:not(:disabled) {
     background-color: var(--dm-primary, #3b82f6);
     color: white;
   }
 
-  :host([variant="outline"]) button:active:not(:disabled) {
+  :host([variant='outline']) button:active:not(:disabled) {
     background-color: var(--dm-primary-hover, #2563eb);
     border-color: var(--dm-primary-hover, #2563eb);
     color: white;

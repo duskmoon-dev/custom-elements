@@ -3,19 +3,33 @@
   "version": "0.0.1",
   "private": true,
   "type": "module",
-  "workspaces": ["elements/*", "packages/*"],
+  "workspaces": [
+    "elements/*",
+    "packages/*"
+  ],
   "scripts": {
     "build": "bun run --filter '*' build",
     "dev": "bun run --filter '*' dev",
-    "lint": "bun run --filter '*' lint",
     "test": "bun run --filter '*' test",
     "typecheck": "bun run --filter '*' typecheck",
     "clean": "bun run --filter '*' clean",
     "build:core": "bun run --filter @duskmoon-dev/el-core build",
-    "build:elements": "bun run --filter '@duskmoon-dev/el-*' --filter '!@duskmoon-dev/el-core' build"
+    "build:elements": "bun run --filter '@duskmoon-dev/el-button' --filter '@duskmoon-dev/el-card' --filter '@duskmoon-dev/el-input' --filter '@duskmoon-dev/el-markdown' build",
+    "build:all": "bun run build:core && bun run build:elements",
+    "format": "bun run --filter '*' format",
+    "format:check": "bun run --filter '*' format:check",
+    "lint": "bun run --filter '*' lint",
+    "lint:check": "bun run --filter '*' lint:check",
+    "lint:fix": "bun run --filter '*' lint:fix"
   },
   "devDependencies": {
+    "@eslint/js": "9.39.2",
     "@types/bun": "^1.1.14",
-    "typescript": "^5.7.2"
+    "del-cli": "7.0.0",
+    "eslint": "9.39.2",
+    "globals": "16.5.0",
+    "prettier": "3.7.4",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "8.51.0"
   }
 }

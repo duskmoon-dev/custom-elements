@@ -63,18 +63,18 @@ const styles = css`
 
   /* Elevated variant (default) */
   :host(:not([variant])) .card,
-  :host([variant="elevated"]) .card {
+  :host([variant='elevated']) .card {
     box-shadow: var(--dm-card-shadow, var(--dm-shadow-md, 0 4px 6px -1px rgb(0 0 0 / 0.1)));
   }
 
   /* Outlined variant */
-  :host([variant="outlined"]) .card {
+  :host([variant='outlined']) .card {
     border: 1px solid var(--dm-card-border-color, var(--dm-gray-200, #e5e7eb));
     box-shadow: none;
   }
 
   /* Filled variant */
-  :host([variant="filled"]) .card {
+  :host([variant='filled']) .card {
     background-color: var(--dm-card-background, var(--dm-gray-50, #f9fafb));
     box-shadow: none;
   }
@@ -88,16 +88,16 @@ const styles = css`
     transform: translateY(-2px);
   }
 
-  :host([interactive][variant="elevated"]) .card:hover,
+  :host([interactive][variant='elevated']) .card:hover,
   :host([interactive]:not([variant])) .card:hover {
     box-shadow: var(--dm-shadow-lg, 0 10px 15px -3px rgb(0 0 0 / 0.1));
   }
 
-  :host([interactive][variant="outlined"]) .card:hover {
+  :host([interactive][variant='outlined']) .card:hover {
     border-color: var(--dm-primary, #3b82f6);
   }
 
-  :host([interactive][variant="filled"]) .card:hover {
+  :host([interactive][variant='filled']) .card:hover {
     background-color: var(--dm-gray-100, #f3f4f6);
   }
 
@@ -139,34 +139,34 @@ const styles = css`
 
   /* Padding variants */
   :host(:not([padding])) .body,
-  :host([padding="md"]) .body {
+  :host([padding='md']) .body {
     padding: var(--dm-card-padding, var(--dm-spacing-md, 1rem));
   }
 
-  :host([padding="none"]) .body {
+  :host([padding='none']) .body {
     padding: 0;
   }
 
-  :host([padding="sm"]) .body {
+  :host([padding='sm']) .body {
     padding: var(--dm-card-padding, var(--dm-spacing-sm, 0.5rem));
   }
 
-  :host([padding="lg"]) .body {
+  :host([padding='lg']) .body {
     padding: var(--dm-card-padding, var(--dm-spacing-lg, 1.5rem));
   }
 
   :host(:not([padding])) .header,
-  :host([padding="md"]) .header {
+  :host([padding='md']) .header {
     padding: var(--dm-card-padding, var(--dm-spacing-md, 1rem));
     padding-bottom: 0;
   }
 
-  :host([padding="sm"]) .header {
+  :host([padding='sm']) .header {
     padding: var(--dm-card-padding, var(--dm-spacing-sm, 0.5rem));
     padding-bottom: 0;
   }
 
-  :host([padding="lg"]) .header {
+  :host([padding='lg']) .header {
     padding: var(--dm-card-padding, var(--dm-spacing-lg, 1.5rem));
     padding-bottom: 0;
   }
@@ -184,19 +184,19 @@ const styles = css`
     display: block;
   }
 
-  :host([padding="sm"]) .footer {
+  :host([padding='sm']) .footer {
     padding: var(--dm-card-padding, var(--dm-spacing-sm, 0.5rem));
     padding-top: 0;
     margin-top: var(--dm-spacing-sm, 0.5rem);
   }
 
-  :host([padding="lg"]) .footer {
+  :host([padding='lg']) .footer {
     padding: var(--dm-card-padding, var(--dm-spacing-lg, 1.5rem));
     padding-top: 0;
     margin-top: var(--dm-spacing-lg, 1.5rem);
   }
 
-  :host([padding="none"]) .footer {
+  :host([padding='none']) .footer {
     padding: var(--dm-spacing-md, 1rem);
     margin-top: 0;
   }

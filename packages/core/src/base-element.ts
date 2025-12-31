@@ -146,7 +146,7 @@ export abstract class BaseElement extends HTMLElement {
   private _reflectToAttribute(
     attrName: string,
     value: unknown,
-    type?: typeof String | typeof Number | typeof Boolean | typeof Object | typeof Array
+    type?: typeof String | typeof Number | typeof Boolean | typeof Object | typeof Array,
   ): void {
     if (value === null || value === undefined) {
       this.removeAttribute(attrName);
@@ -175,7 +175,7 @@ export abstract class BaseElement extends HTMLElement {
    */
   private _attributeToProperty(
     value: string | null,
-    type?: typeof String | typeof Number | typeof Boolean | typeof Object | typeof Array
+    type?: typeof String | typeof Number | typeof Boolean | typeof Object | typeof Array,
   ): unknown {
     if (value === null) {
       return type === Boolean ? false : undefined;
@@ -288,11 +288,7 @@ export abstract class BaseElement extends HTMLElement {
    * @param detail - Event detail data
    * @param options - Additional event options
    */
-  protected emit<T>(
-    name: string,
-    detail?: T,
-    options?: Omit<CustomEventInit, 'detail'>
-  ): boolean {
+  protected emit<T>(name: string, detail?: T, options?: Omit<CustomEventInit, 'detail'>): boolean {
     const event = new CustomEvent(name, {
       bubbles: true,
       composed: true,

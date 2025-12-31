@@ -44,7 +44,10 @@ export type MarkdownTheme = 'github' | 'atom-one-dark' | 'atom-one-light' | 'aut
 const baseStyles = css`
   :host {
     display: block;
-    font-family: var(--dm-markdown-font-family, var(--dm-font-family, system-ui, -apple-system, sans-serif));
+    font-family: var(
+      --dm-markdown-font-family,
+      var(--dm-font-family, system-ui, -apple-system, sans-serif)
+    );
     line-height: var(--dm-markdown-line-height, 1.6);
     color: var(--dm-gray-900, #111827);
   }
@@ -75,12 +78,27 @@ const baseStyles = css`
     line-height: 1.25;
   }
 
-  .content h1 { font-size: 2em; }
-  .content h2 { font-size: 1.5em; border-bottom: 1px solid var(--dm-gray-200, #e5e7eb); padding-bottom: 0.3em; }
-  .content h3 { font-size: 1.25em; }
-  .content h4 { font-size: 1em; }
-  .content h5 { font-size: 0.875em; }
-  .content h6 { font-size: 0.85em; color: var(--dm-gray-500, #6b7280); }
+  .content h1 {
+    font-size: 2em;
+  }
+  .content h2 {
+    font-size: 1.5em;
+    border-bottom: 1px solid var(--dm-gray-200, #e5e7eb);
+    padding-bottom: 0.3em;
+  }
+  .content h3 {
+    font-size: 1.25em;
+  }
+  .content h4 {
+    font-size: 1em;
+  }
+  .content h5 {
+    font-size: 0.875em;
+  }
+  .content h6 {
+    font-size: 0.85em;
+    color: var(--dm-gray-500, #6b7280);
+  }
 
   .content p {
     margin-top: 0;
@@ -131,13 +149,21 @@ const baseStyles = css`
     gap: 0.5em;
   }
 
-  .content .task-list-item input[type="checkbox"] {
+  .content .task-list-item input[type='checkbox'] {
     margin: 0;
   }
 
   /* Code */
   .content code {
-    font-family: var(--dm-markdown-code-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+    font-family: var(
+      --dm-markdown-code-font-family,
+      ui-monospace,
+      SFMono-Regular,
+      Menlo,
+      Monaco,
+      Consolas,
+      monospace
+    );
     font-size: 0.875em;
     padding: 0.2em 0.4em;
     background-color: var(--dm-gray-100, #f3f4f6);
@@ -251,7 +277,9 @@ const baseStyles = css`
   }
 
   @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   /* Error state */
@@ -339,7 +367,7 @@ export class ElDmMarkdown extends BaseElement {
   private _updateTheme(): void {
     // Remove existing theme sheets
     const sheets = this.shadowRoot.adoptedStyleSheets.filter(
-      (s) => s !== githubSheet && s !== darkSheet && s !== lightSheet && s !== autoThemeSheet
+      (s) => s !== githubSheet && s !== darkSheet && s !== lightSheet && s !== autoThemeSheet,
     );
 
     // Add the appropriate theme sheet

@@ -18,23 +18,18 @@ bun add mermaid
 
 ### Inline Content
 
-```html
+````html
 <script type="module">
   import { register } from '@duskmoon-dev/el-markdown';
   register();
 </script>
 
 <el-dm-markdown>
-  # Hello World
+  # Hello World This is **markdown** content with: - Lists - Code blocks - And more! ```javascript
+  console.log('Syntax highlighting!');</el-dm-markdown
+>
+````
 
-  This is **markdown** content with:
-  - Lists
-  - Code blocks
-  - And more!
-
-  ```javascript
-  console.log('Syntax highlighting!');
-  ```
 </el-dm-markdown>
 ```
 
@@ -46,16 +41,13 @@ bun add mermaid
 
 ### With Mermaid Diagrams
 
-```html
+````html
 <el-dm-markdown>
-  # Flowchart Example
+  # Flowchart Example ```mermaid graph TD A[Start] --> B{Is it?} B -->|Yes| C[OK] B -->|No|
+  D[End]</el-dm-markdown
+>
+````
 
-  ```mermaid
-  graph TD
-    A[Start] --> B{Is it?}
-    B -->|Yes| C[OK]
-    B -->|No| D[End]
-  ```
 </el-dm-markdown>
 ```
 
@@ -70,51 +62,50 @@ bun add mermaid
 
 ## Themes
 
-| Theme | Description |
-|-------|-------------|
-| `auto` | Follows system preference (default) |
-| `github` | GitHub-style light theme |
-| `atom-one-dark` | Atom One Dark theme |
-| `atom-one-light` | Atom One Light theme |
+| Theme            | Description                         |
+| ---------------- | ----------------------------------- |
+| `auto`           | Follows system preference (default) |
+| `github`         | GitHub-style light theme            |
+| `atom-one-dark`  | Atom One Dark theme                 |
+| `atom-one-light` | Atom One Light theme                |
 
-```html
-<el-dm-markdown theme="atom-one-dark">
-  ```js
-  const dark = true;
-  ```
+````html
+<el-dm-markdown theme="atom-one-dark"> ```js const dark = true;</el-dm-markdown>
+````
+
 </el-dm-markdown>
 ```
 
 ## Attributes
 
-| Attribute | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `src` | string | | URL to fetch markdown from |
-| `theme` | string | `auto` | Code syntax highlighting theme |
-| `debug` | boolean | `false` | Enable debug logging |
-| `no-mermaid` | boolean | `false` | Disable mermaid rendering |
+| Attribute    | Type    | Default | Description                    |
+| ------------ | ------- | ------- | ------------------------------ |
+| `src`        | string  |         | URL to fetch markdown from     |
+| `theme`      | string  | `auto`  | Code syntax highlighting theme |
+| `debug`      | boolean | `false` | Enable debug logging           |
+| `no-mermaid` | boolean | `false` | Disable mermaid rendering      |
 
 ## CSS Parts
 
-| Part | Description |
-|------|-------------|
-| `container` | The outer container |
-| `content` | The rendered markdown content |
+| Part        | Description                   |
+| ----------- | ----------------------------- |
+| `container` | The outer container           |
+| `content`   | The rendered markdown content |
 
 ## Events
 
-| Event | Detail | Description |
-|-------|--------|-------------|
-| `dm-rendered` | `{ html: string }` | Fired after markdown is rendered |
-| `dm-error` | `{ error: string }` | Fired when an error occurs |
+| Event         | Detail              | Description                      |
+| ------------- | ------------------- | -------------------------------- |
+| `dm-rendered` | `{ html: string }`  | Fired after markdown is rendered |
+| `dm-error`    | `{ error: string }` | Fired when an error occurs       |
 
 ## CSS Custom Properties
 
-| Property | Description |
-|----------|-------------|
-| `--dm-markdown-font-family` | Font family for content |
-| `--dm-markdown-code-font-family` | Font family for code |
-| `--dm-markdown-line-height` | Line height |
+| Property                         | Description             |
+| -------------------------------- | ----------------------- |
+| `--dm-markdown-font-family`      | Font family for content |
+| `--dm-markdown-code-font-family` | Font family for code    |
+| `--dm-markdown-line-height`      | Line height             |
 
 ## Supported Markdown Features
 
@@ -136,32 +127,21 @@ bun add mermaid
 ### Task List
 
 ```html
-<el-dm-markdown>
-  ## Todo
-
-  - [x] Complete task
-  - [ ] Pending task
-  - [ ] Another task
-</el-dm-markdown>
+<el-dm-markdown> ## Todo - [x] Complete task - [ ] Pending task - [ ] Another task </el-dm-markdown>
 ```
 
 ### Table
 
 ```html
 <el-dm-markdown>
-  | Feature | Status |
-  |---------|--------|
-  | Tables | Supported |
-  | Strikethrough | ~~Yes~~ |
+  | Feature | Status | |---------|--------| | Tables | Supported | | Strikethrough | ~~Yes~~ |
 </el-dm-markdown>
 ```
 
 ### Loading Remote Content
 
 ```html
-<el-dm-markdown
-  src="https://raw.githubusercontent.com/user/repo/main/README.md"
-></el-dm-markdown>
+<el-dm-markdown src="https://raw.githubusercontent.com/user/repo/main/README.md"></el-dm-markdown>
 ```
 
 ## License

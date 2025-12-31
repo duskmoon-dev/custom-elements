@@ -125,17 +125,17 @@ const styles = css`
 
   /* Size variants */
   :host(:not([size])) .input-wrapper,
-  :host([size="md"]) .input-wrapper {
+  :host([size='md']) .input-wrapper {
     min-height: var(--dm-input-height, 2.5rem);
     padding: 0 var(--dm-input-padding-x, 0.75rem);
   }
 
-  :host([size="sm"]) .input-wrapper {
+  :host([size='sm']) .input-wrapper {
     min-height: var(--dm-input-height, 2rem);
     padding: 0 var(--dm-input-padding-x, 0.5rem);
   }
 
-  :host([size="lg"]) .input-wrapper {
+  :host([size='lg']) .input-wrapper {
     min-height: var(--dm-input-height, 3rem);
     padding: 0 var(--dm-input-padding-x, 1rem);
   }
@@ -152,11 +152,11 @@ const styles = css`
     outline: none;
   }
 
-  :host([size="sm"]) input {
+  :host([size='sm']) input {
     font-size: var(--dm-input-font-size, var(--dm-font-size-sm, 0.875rem));
   }
 
-  :host([size="lg"]) input {
+  :host([size='lg']) input {
     font-size: var(--dm-input-font-size, var(--dm-font-size-lg, 1.125rem));
   }
 
@@ -209,7 +209,7 @@ const styles = css`
     animation: spin 0.6s linear infinite;
   }
 
-  :host([validation-state="pending"]) .pending-indicator {
+  :host([validation-state='pending']) .pending-indicator {
     display: block;
   }
 
@@ -378,22 +378,25 @@ export class ElDmInput extends BaseElement {
       this._focused ? 'focused' : '',
       this.disabled ? 'disabled' : '',
       this.validationState || '',
-    ].filter(Boolean).join(' ');
+    ]
+      .filter(Boolean)
+      .join(' ');
 
-    const labelClasses = [
-      'label',
-      this.required ? 'required' : '',
-    ].filter(Boolean).join(' ');
+    const labelClasses = ['label', this.required ? 'required' : ''].filter(Boolean).join(' ');
 
     const inputId = `input-${Math.random().toString(36).slice(2, 9)}`;
 
     return `
       <div class="container" part="container">
-        ${this.label ? `
+        ${
+          this.label
+            ? `
           <label class="${labelClasses}" for="${inputId}" part="label">
             ${this.label}
           </label>
-        ` : ''}
+        `
+            : ''
+        }
 
         <div class="${wrapperClasses}" part="input-wrapper">
           <span class="prefix" part="prefix">
@@ -421,17 +424,25 @@ export class ElDmInput extends BaseElement {
           </span>
         </div>
 
-        ${this.validationState === 'invalid' && this.errorMessage ? `
+        ${
+          this.validationState === 'invalid' && this.errorMessage
+            ? `
           <span id="error" class="error" part="error" role="alert">
             ${this.errorMessage}
           </span>
-        ` : ''}
+        `
+            : ''
+        }
 
-        ${this.helperText && this.validationState !== 'invalid' ? `
+        ${
+          this.helperText && this.validationState !== 'invalid'
+            ? `
           <span id="helper" class="helper" part="helper">
             ${this.helperText}
           </span>
-        ` : ''}
+        `
+            : ''
+        }
       </div>
     `;
   }

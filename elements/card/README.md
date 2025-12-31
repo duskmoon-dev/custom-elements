@@ -27,57 +27,57 @@ bun add @duskmoon-dev/el-card
 
 ## Variants
 
-| Variant | Description |
-|---------|-------------|
+| Variant    | Description                       |
+| ---------- | --------------------------------- |
 | `elevated` | Raised card with shadow (default) |
-| `outlined` | Card with border |
-| `filled` | Card with subtle background |
+| `outlined` | Card with border                  |
+| `filled`   | Card with subtle background       |
 
 ## Padding
 
-| Size | Description |
-|------|-------------|
-| `none` | No padding |
-| `sm` | Small padding |
-| `md` | Medium padding (default) |
-| `lg` | Large padding |
+| Size   | Description              |
+| ------ | ------------------------ |
+| `none` | No padding               |
+| `sm`   | Small padding            |
+| `md`   | Medium padding (default) |
+| `lg`   | Large padding            |
 
 ## Attributes
 
-| Attribute | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `variant` | string | `elevated` | Card variant |
-| `interactive` | boolean | `false` | Make card clickable |
-| `padding` | string | `md` | Padding size |
+| Attribute     | Type    | Default    | Description         |
+| ------------- | ------- | ---------- | ------------------- |
+| `variant`     | string  | `elevated` | Card variant        |
+| `interactive` | boolean | `false`    | Make card clickable |
+| `padding`     | string  | `md`       | Padding size        |
 
 ## Slots
 
-| Slot | Description |
-|------|-------------|
-| (default) | Card body content |
-| `header` | Header section |
-| `footer` | Footer section |
-| `media` | Media content (image/video) at top |
+| Slot      | Description                        |
+| --------- | ---------------------------------- |
+| (default) | Card body content                  |
+| `header`  | Header section                     |
+| `footer`  | Footer section                     |
+| `media`   | Media content (image/video) at top |
 
 ## CSS Parts
 
-| Part | Description |
-|------|-------------|
-| `card` | Main card container |
-| `header` | Header section |
-| `body` | Body section |
-| `footer` | Footer section |
-| `media` | Media section |
+| Part     | Description         |
+| -------- | ------------------- |
+| `card`   | Main card container |
+| `header` | Header section      |
+| `body`   | Body section        |
+| `footer` | Footer section      |
+| `media`  | Media section       |
 
 ## CSS Custom Properties
 
-| Property | Description |
-|----------|-------------|
-| `--dm-card-padding` | Card padding |
-| `--dm-card-border-radius` | Border radius |
-| `--dm-card-background` | Background color |
-| `--dm-card-border-color` | Border color |
-| `--dm-card-shadow` | Box shadow |
+| Property                  | Description      |
+| ------------------------- | ---------------- |
+| `--dm-card-padding`       | Card padding     |
+| `--dm-card-border-radius` | Border radius    |
+| `--dm-card-background`    | Background color |
+| `--dm-card-border-color`  | Border color     |
+| `--dm-card-shadow`        | Box shadow       |
 
 ## Examples
 
@@ -85,7 +85,7 @@ bun add @duskmoon-dev/el-card
 
 ```html
 <el-dm-card>
-  <img slot="media" src="image.jpg" alt="Card image">
+  <img slot="media" src="image.jpg" alt="Card image" />
   <h3 slot="header">Image Card</h3>
   <p>Description of the image.</p>
 </el-dm-card>

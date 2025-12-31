@@ -2,25 +2,34 @@
   "name": "@duskmoon-dev/el-markdown",
   "version": "0.0.1",
   "type": "module",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
     }
   },
-  "files": ["dist", "src"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "bun run build:js && bun run build:types",
-    "build:js": "bun build ./src/index.ts --outdir ./dist --format esm --sourcemap --external @duskmoon-dev/el-core",
-    "build:types": "tsc --emitDeclarationOnly --outDir dist",
-    "dev": "bun build ./src/index.ts --outdir ./dist --format esm --sourcemap --external @duskmoon-dev/el-core --watch",
-    "clean": "rm -rf dist",
+    "prebuild": "bun run clean",
+    "build": "bun run build:esm && bun run build:cjs && bun run build:types",
+    "build:esm": "bun build ./src/index.ts --outdir ./dist/esm --format esm --sourcemap --external @duskmoon-dev/el-core",
+    "build:cjs": "bun build ./src/index.ts --outdir ./dist/cjs --format cjs --sourcemap --external @duskmoon-dev/el-core",
+    "build:types": "tsc --emitDeclarationOnly --outDir ./dist/types",
+    "dev": "bun build ./src/index.ts --outdir ./dist/esm --format esm --sourcemap --external @duskmoon-dev/el-core --watch",
+    "clean": "del-cli dist",
     "test": "bun test",
     "typecheck": "tsc --noEmit",
-    "lint": "tsc --noEmit"
+    "format": "prettier --write 'src/**/*.ts' '*.json' '*.md'",
+    "format:check": "prettier --check 'src/**/*.ts' '*.json' '*.md'",
+    "lint": "eslint src",
+    "lint:check": "eslint src --max-warnings 0",
+    "lint:fix": "eslint src --fix"
   },
   "dependencies": {
     "@duskmoon-dev/el-core": "workspace:*",

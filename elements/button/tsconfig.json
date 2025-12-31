@@ -1,20 +1,15 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "./dist",
+    "rootDir": "./src",
+    "outDir": "./dist/types",
     "declaration": true,
     "declarationMap": true,
     "noEmit": false,
     "emitDeclarationOnly": true,
-    "composite": true,
-    "baseUrl": ".",
-    "paths": {
-      "@duskmoon-dev/el-core": ["../../packages/core/dist/index.d.ts"]
-    }
+    "composite": true
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist", "**/*.test.ts"],
-  "references": [
-    { "path": "../../packages/core" }
-  ]
+  "references": [{ "path": "../../packages/core" }]
 }
