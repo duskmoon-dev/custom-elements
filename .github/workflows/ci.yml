@@ -53,5 +53,5 @@ jobs:
       - run: bun install --frozen-lockfile
       - run: bun run build:all
       - name: Setup npm auth
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
       - run: bun run publish:dry-run
