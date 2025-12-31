@@ -32,6 +32,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
       - run: bun install --frozen-lockfile
+      - run: bun run build:all
       - run: bun run typecheck
 
   build:
@@ -46,6 +47,8 @@ jobs:
   publish-dryrun:
     name: Publish (Dry Run)
     runs-on: ubuntu-latest
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
