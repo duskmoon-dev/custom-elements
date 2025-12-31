@@ -18,6 +18,7 @@ A collection of customizable web components built with vanilla JavaScript and Sh
 | [@duskmoon-dev/el-button](./elements/button) | Button component | 0.0.1 |
 | [@duskmoon-dev/el-card](./elements/card) | Card container component | 0.0.1 |
 | [@duskmoon-dev/el-input](./elements/input) | Text input component | 0.0.1 |
+| [@duskmoon-dev/el-markdown](./elements/markdown) | Markdown renderer component | 0.0.1 |
 
 ## Installation
 
@@ -71,6 +72,20 @@ bun add @duskmoon-dev/el-core
   placeholder="you@example.com"
   required
 ></el-dm-input>
+```
+
+### Markdown (`<el-dm-markdown>`)
+
+```html
+<el-dm-markdown>
+  # Hello Markdown!
+
+  This is **bold** and *italic* text.
+
+  ```javascript
+  console.log('Syntax highlighting!');
+  ```
+</el-dm-markdown>
 ```
 
 ## Theming
@@ -129,7 +144,8 @@ duskmoon-elements/
 ├── elements/                    # Element packages
 │   ├── button/                  # @duskmoon-dev/el-button
 │   ├── card/                    # @duskmoon-dev/el-card
-│   └── input/                   # @duskmoon-dev/el-input
+│   ├── input/                   # @duskmoon-dev/el-input
+│   └── markdown/                # @duskmoon-dev/el-markdown
 ├── packages/
 │   └── core/                    # @duskmoon-dev/el-core
 ├── playground/                  # Interactive demo

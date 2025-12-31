@@ -287,6 +287,87 @@
     </div>
   </section>
 
+  <!-- Markdown Examples -->
+  <h2>Markdown (<code>&lt;el-dm-markdown&gt;</code>)</h2>
+
+  <section>
+    <h3>Basic Markdown</h3>
+    <el-dm-markdown>
+      # Hello Markdown!
+
+      This is a **bold** and *italic* text with ~~strikethrough~~.
+
+      ## Features
+
+      - GitHub Flavored Markdown
+      - Syntax highlighting
+      - Tables support
+
+      > This is a blockquote with some wisdom.
+
+      | Feature | Status |
+      |---------|--------|
+      | Tables | Supported |
+      | Lists | Supported |
+      | Code | Supported |
+    </el-dm-markdown>
+  </section>
+
+  <section>
+    <h3>Code Highlighting</h3>
+    <el-dm-markdown>
+      ### JavaScript Example
+
+      ```javascript
+      function greet(name) {
+        console.log(`Hello, ${name}!`);
+        return { greeting: 'Hello', name };
+      }
+
+      greet('World');
+      ```
+
+      ### TypeScript Example
+
+      ```typescript
+      interface User {
+        name: string;
+        age: number;
+      }
+
+      const user: User = { name: 'Alice', age: 30 };
+      ```
+    </el-dm-markdown>
+  </section>
+
+  <section>
+    <h3>Theme: Atom One Dark</h3>
+    <el-dm-markdown theme="atom-one-dark">
+      ```python
+      def fibonacci(n):
+          if n <= 1:
+              return n
+          return fibonacci(n-1) + fibonacci(n-2)
+
+      print(fibonacci(10))
+      ```
+    </el-dm-markdown>
+  </section>
+
+  <section>
+    <h3>Task Lists</h3>
+    <el-dm-markdown>
+      ## Project Checklist
+
+      - [x] Create base element class
+      - [x] Implement button component
+      - [x] Implement card component
+      - [x] Implement input component
+      - [x] Add markdown component
+      - [ ] Add more components
+    </el-dm-markdown>
+  </section>
+
   <!-- Form Example -->
   <h2>Form Example</h2>
 
@@ -325,10 +406,12 @@
     import { register as registerButton } from '../elements/button/src/index.ts';
     import { register as registerCard } from '../elements/card/src/index.ts';
     import { register as registerInput } from '../elements/input/src/index.ts';
+    import { register as registerMarkdown } from '../elements/markdown/src/index.ts';
 
     registerButton();
     registerCard();
     registerInput();
+    registerMarkdown();
 
     // Form submit handler
     window.handleSubmit = (event) => {
