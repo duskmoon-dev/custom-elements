@@ -73,7 +73,7 @@ jobs:
           NEW_VERSION="${{ steps.version.outputs.new }}"
 
           # Update all package.json files
-          for pkg in packages/core elements/button elements/card elements/input elements/markdown; do
+          for pkg in packages/core packages/elements elements/button elements/card elements/input elements/markdown; do
             jq --arg v "$NEW_VERSION" '.version = $v' "$pkg/package.json" > tmp.json && mv tmp.json "$pkg/package.json"
             echo "Updated $pkg/package.json to $NEW_VERSION"
           done
@@ -114,6 +114,16 @@ jobs:
             fi
             cd ../..
           done
+
+          # Publish bundle package
+          echo "Publishing @duskmoon-dev/elements..."
+          cd packages/elements
+          if npm view @duskmoon-dev/elements@$NEW_VERSION version >/dev/null 2>&1; then
+            echo "  @duskmoon-dev/elements@$NEW_VERSION already published, skipping"
+          else
+            bun publish --access public
+          fi
+          cd ../..
 
           echo "All packages published!"
 
@@ -158,11 +168,15 @@ jobs:
             | @duskmoon-dev/el-card | Flexible card container with header, body, footer, and media sections | [![npm](https://img.shields.io/npm/v/@duskmoon-dev/el-card)](https://www.npmjs.com/package/@duskmoon-dev/el-card) |
             | @duskmoon-dev/el-input | Form input with validation, labels, helper text, and prefix/suffix slots | [![npm](https://img.shields.io/npm/v/@duskmoon-dev/el-input)](https://www.npmjs.com/package/@duskmoon-dev/el-input) |
             | @duskmoon-dev/el-markdown | Markdown renderer with syntax highlighting, streaming mode for LLM output, and mermaid support | [![npm](https://img.shields.io/npm/v/@duskmoon-dev/el-markdown)](https://www.npmjs.com/package/@duskmoon-dev/el-markdown) |
+            | @duskmoon-dev/elements | All DuskMoon elements in one bundle with auto-registration support | [![npm](https://img.shields.io/npm/v/@duskmoon-dev/elements)](https://www.npmjs.com/package/@duskmoon-dev/elements) |
 
             ## Installation
 
             ```bash
-            # Install individual packages
+            # Install the bundle (includes all elements)
+            bun add @duskmoon-dev/elements
+
+            # Or install individual packages
             bun add @duskmoon-dev/el-core
             bun add @duskmoon-dev/el-button
             bun add @duskmoon-dev/el-card
@@ -187,3 +201,4 @@ jobs:
           echo "- @duskmoon-dev/el-card" >> $GITHUB_STEP_SUMMARY
           echo "- @duskmoon-dev/el-input" >> $GITHUB_STEP_SUMMARY
           echo "- @duskmoon-dev/el-markdown" >> $GITHUB_STEP_SUMMARY
+          echo "- @duskmoon-dev/elements" >> $GITHUB_STEP_SUMMARY

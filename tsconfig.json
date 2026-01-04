@@ -18,7 +18,9 @@
       "@duskmoon-dev/el-core": ["./packages/core/src/index.ts"],
       "@duskmoon-dev/el-button": ["./elements/button/src/index.ts"],
       "@duskmoon-dev/el-card": ["./elements/card/src/index.ts"],
-      "@duskmoon-dev/el-input": ["./elements/input/src/index.ts"]
+      "@duskmoon-dev/el-input": ["./elements/input/src/index.ts"],
+      "@duskmoon-dev/el-markdown": ["./elements/markdown/src/index.ts"],
+      "@duskmoon-dev/elements": ["./packages/elements/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "dist", "*.test.ts"]
