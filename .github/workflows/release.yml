@@ -151,13 +151,13 @@ jobs:
           body: |
             ## Published Packages
 
-            | Package | npm |
-            |---------|-----|
-            | @duskmoon-dev/el-core | [![npm](https://img.shields.io/npm/v/@duskmoon-dev/el-core)](https://www.npmjs.com/package/@duskmoon-dev/el-core) |
-            | @duskmoon-dev/el-button | [![npm](https://img.shields.io/npm/v/@duskmoon-dev/el-button)](https://www.npmjs.com/package/@duskmoon-dev/el-button) |
-            | @duskmoon-dev/el-card | [![npm](https://img.shields.io/npm/v/@duskmoon-dev/el-card)](https://www.npmjs.com/package/@duskmoon-dev/el-card) |
-            | @duskmoon-dev/el-input | [![npm](https://img.shields.io/npm/v/@duskmoon-dev/el-input)](https://www.npmjs.com/package/@duskmoon-dev/el-input) |
-            | @duskmoon-dev/el-markdown | [![npm](https://img.shields.io/npm/v/@duskmoon-dev/el-markdown)](https://www.npmjs.com/package/@duskmoon-dev/el-markdown) |
+            | Package | Description | npm |
+            |---------|-------------|-----|
+            | @duskmoon-dev/el-core | Base element class with reactive properties, Shadow DOM, and theming utilities | [![npm](https://img.shields.io/npm/v/@duskmoon-dev/el-core)](https://www.npmjs.com/package/@duskmoon-dev/el-core) |
+            | @duskmoon-dev/el-button | Customizable button with variants, sizes, loading state, and icon slots | [![npm](https://img.shields.io/npm/v/@duskmoon-dev/el-button)](https://www.npmjs.com/package/@duskmoon-dev/el-button) |
+            | @duskmoon-dev/el-card | Flexible card container with header, body, footer, and media sections | [![npm](https://img.shields.io/npm/v/@duskmoon-dev/el-card)](https://www.npmjs.com/package/@duskmoon-dev/el-card) |
+            | @duskmoon-dev/el-input | Form input with validation, labels, helper text, and prefix/suffix slots | [![npm](https://img.shields.io/npm/v/@duskmoon-dev/el-input)](https://www.npmjs.com/package/@duskmoon-dev/el-input) |
+            | @duskmoon-dev/el-markdown | Markdown renderer with syntax highlighting, streaming mode for LLM output, and mermaid support | [![npm](https://img.shields.io/npm/v/@duskmoon-dev/el-markdown)](https://www.npmjs.com/package/@duskmoon-dev/el-markdown) |
 
             ## Installation
 
