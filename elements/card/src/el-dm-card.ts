@@ -45,9 +45,7 @@ const VARIANT_CLASSES: Record<string, string> = {
 };
 
 // Strip @layer wrapper for Shadow DOM compatibility
-const coreStyles = cardCSS
-  .replace(/@layer\s+components\s*\{/, '')
-  .replace(/\}\s*$/, '');
+const coreStyles = cardCSS.replace(/@layer\s+components\s*\{/, '').replace(/\}\s*$/, '');
 
 const styles = css`
   :host {

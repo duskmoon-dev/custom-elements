@@ -1,0 +1,157 @@
+---
+title: Getting Started
+description: Learn how to install and use DuskMoon Elements in your project
+order: 1
+section: getting-started
+---
+
+# Getting Started
+
+DuskMoon Elements is a web components library that bridges the `@duskmoon-dev/core` design system to real-world projects. It provides framework-agnostic, reusable UI components built with native Web Components APIs.
+
+## Installation
+
+### Install the complete package
+
+```bash
+npm install @duskmoon-dev/elements
+```
+
+### Or install individual components
+
+```bash
+npm install @duskmoon-dev/el-button @duskmoon-dev/el-card
+```
+
+### Install the design system (required)
+
+```bash
+npm install @duskmoon-dev/core
+```
+
+## Basic Usage
+
+### 1. Import the design system styles
+
+Add the theme styles to your HTML or CSS:
+
+```html
+<link rel="stylesheet" href="node_modules/@duskmoon-dev/core/dist/moonlight.css" />
+```
+
+Or in your CSS/SCSS:
+
+```css
+@import '@duskmoon-dev/core/dist/moonlight.css';
+```
+
+### 2. Register the components
+
+You can register all components at once:
+
+```javascript
+import '@duskmoon-dev/elements/register';
+```
+
+Or register individual components:
+
+```javascript
+import '@duskmoon-dev/el-button/register';
+import '@duskmoon-dev/el-card/register';
+```
+
+### 3. Use the components
+
+```html
+<el-dm-button variant="primary">Click me</el-dm-button>
+
+<el-dm-card>
+  <h2>Card Title</h2>
+  <p>Card content goes here.</p>
+</el-dm-card>
+```
+
+## Theme Support
+
+DuskMoon Elements supports two themes from `@duskmoon-dev/core`:
+
+- **Moonlight** (dark theme)
+- **Sunshine** (light theme)
+
+Switch themes by changing the `data-theme` attribute on your HTML element:
+
+```html
+<html data-theme="moonlight">
+  <!-- Dark theme -->
+</html>
+
+<html data-theme="sunshine">
+  <!-- Light theme -->
+</html>
+```
+
+## Framework Integration
+
+### Vanilla JavaScript
+
+```html
+<!DOCTYPE html>
+<html data-theme="moonlight">
+<head>
+  <link rel="stylesheet" href="@duskmoon-dev/core/dist/moonlight.css" />
+</head>
+<body>
+  <el-dm-button variant="primary">Click me</el-dm-button>
+
+  <script type="module">
+    import '@duskmoon-dev/el-button/register';
+  </script>
+</body>
+</html>
+```
+
+### React
+
+```tsx
+import '@duskmoon-dev/el-button/register';
+
+function App() {
+  return (
+    <el-dm-button variant="primary" onClick={() => alert('Clicked!')}>
+      Click me
+    </el-dm-button>
+  );
+}
+```
+
+### Vue
+
+```vue
+<template>
+  <el-dm-button variant="primary" @click="handleClick">
+    Click me
+  </el-dm-button>
+</template>
+
+<script setup>
+import '@duskmoon-dev/el-button/register';
+
+function handleClick() {
+  alert('Clicked!');
+}
+</script>
+```
+
+## Browser Support
+
+DuskMoon Elements supports all modern browsers:
+
+- Chrome/Edge 84+
+- Firefox 101+
+- Safari 16.4+
+
+## Next Steps
+
+- Explore the [Button](/duskmoon-elements/docs/components/button) component
+- Learn about [Theming](/duskmoon-elements/docs/theming)
+- Browse all [Components](/duskmoon-elements/docs/components/button)

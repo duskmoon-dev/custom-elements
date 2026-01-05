@@ -122,6 +122,8 @@ Elements use `"@duskmoon-dev/el-core": "workspace:*"` which gets resolved to act
 ## Active Technologies
 - TypeScript (ES2022+ target) + Vite (build tool), existing element packages (@duskmoon-dev/el-*) (001-vite-playground)
 - N/A (static site, no persistent storage) (001-vite-playground)
+- TypeScript (ES2022+ target), Astro 5.x + Astro, @duskmoon-dev/core, @duskmoon-dev/el-* packages (001-astro-docs)
+- N/A (static site generation) (001-astro-docs)
 
 ## Recent Changes
 - 001-vite-playground: Added TypeScript (ES2022+ target) + Vite (build tool), existing element packages (@duskmoon-dev/el-*)

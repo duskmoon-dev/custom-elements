@@ -1,0 +1,120 @@
+---
+import { getCollection } from 'astro:content';
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import { findPrevNext } from '../../utils/navigation';
+
+export async function getStaticPaths() {
+  const docs = await getCollection('docs');
+  return docs.map((doc) => ({
+    params: { slug: doc.slug },
+    props: { doc },
+  }));
+}
+
+const { doc } = Astro.props;
+const { Content } = await doc.render();
+
+// Get all docs for prev/next navigation
+const allDocs = await getCollection('docs', ({ data }) => !data.draft);
+const { prev, next } = findPrevNext(allDocs, doc.slug);
+---
+
+<DocsLayout
+  title={doc.data.title}
+  description={doc.data.description}
+  currentPath={Astro.url.pathname}
+>
+  <Content />
+
+  {(prev || next) && (
+    <nav class="prev-next-nav" aria-label="Page navigation">
+      <div class="prev-next-container">
+        {prev ? (
+          <a href={`/duskmoon-elements/docs/${prev.slug}`} class="prev-link">
+            <span class="nav-label">Previous</span>
+            <span class="nav-title">{prev.title}</span>
+          </a>
+        ) : (
+          <div />
+        )}
+        {next ? (
+          <a href={`/duskmoon-elements/docs/${next.slug}`} class="next-link">
+            <span class="nav-label">Next</span>
+            <span class="nav-title">{next.title}</span>
+          </a>
+        ) : (
+          <div />
+        )}
+      </div>
+    </nav>
+  )}
+</DocsLayout>
+
+<style>
+  .prev-next-nav {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-outline, #e0e0e0);
+  }
+
+  .prev-next-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .prev-link,
+  .next-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem;
+    border: 1px solid var(--color-outline, #e0e0e0);
+    border-radius: 0.5rem;
+    text-decoration: none;
+    color: var(--color-on-surface);
+    transition: border-color 0.2s, background-color 0.2s;
+    max-width: 50%;
+  }
+
+  .prev-link:hover,
+  .next-link:hover {
+    border-color: var(--color-primary);
+    background-color: var(--color-surface-variant);
+    text-decoration: none;
+  }
+
+  .next-link {
+    text-align: right;
+    margin-left: auto;
+  }
+
+  .nav-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-primary);
+  }
+
+  .nav-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-on-surface);
+  }
+
+  @media (max-width: 640px) {
+    .prev-next-container {
+      flex-direction: column;
+    }
+
+    .prev-link,
+    .next-link {
+      max-width: 100%;
+    }
+
+    .next-link {
+      text-align: left;
+    }
+  }
+</style>

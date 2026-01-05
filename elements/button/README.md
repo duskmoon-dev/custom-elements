@@ -1,7 +1,8 @@
 # @duskmoon-dev/el-button
 
 A customizable button component for DuskMoon Elements.
-ok, 
+ok,
+
 ## Installation
 
 ```bash

@@ -1,0 +1,174 @@
+---
+title: Card
+description: Container component for grouping related content
+order: 2
+section: components
+component: "@duskmoon-dev/el-card"
+---
+
+import ComponentDemo from '../../../components/ComponentDemo.astro';
+
+# Card
+
+The Card component is a container for grouping and displaying related content in a visually distinct manner.
+
+## Installation
+
+```bash
+npm install @duskmoon-dev/el-card
+```
+
+## Usage
+
+```javascript
+import '@duskmoon-dev/el-card/register';
+```
+
+```html
+<el-dm-card>
+  <h2>Card Title</h2>
+  <p>Card content goes here.</p>
+</el-dm-card>
+```
+
+## Live Demo
+
+<ComponentDemo title="Card Variants">
+  <el-dm-card variant="elevated" style="width: 200px;">
+    <h4 style="margin-top: 0;">Elevated</h4>
+    <p style="margin-bottom: 0;">With shadow</p>
+  </el-dm-card>
+  <el-dm-card variant="outlined" style="width: 200px;">
+    <h4 style="margin-top: 0;">Outlined</h4>
+    <p style="margin-bottom: 0;">With border</p>
+  </el-dm-card>
+  <el-dm-card variant="filled" style="width: 200px;">
+    <h4 style="margin-top: 0;">Filled</h4>
+    <p style="margin-bottom: 0;">Solid background</p>
+  </el-dm-card>
+</ComponentDemo>
+
+<script>
+  import('@duskmoon-dev/el-card/register').then(m => m.register());
+</script>
+
+## Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `variant` | `'elevated' \| 'outlined' \| 'filled'` | `'elevated'` | Visual style of the card |
+| `padding` | `'none' \| 'sm' \| 'md' \| 'lg'` | `'md'` | Internal padding |
+| `interactive` | `boolean` | `false` | Enables hover effects for clickable cards |
+
+## Variants
+
+### Elevated
+
+The elevated variant has a shadow for depth.
+
+```html
+<el-dm-card variant="elevated">
+  <h3>Elevated Card</h3>
+  <p>This card has a subtle shadow.</p>
+</el-dm-card>
+```
+
+### Outlined
+
+The outlined variant has a border instead of shadow.
+
+```html
+<el-dm-card variant="outlined">
+  <h3>Outlined Card</h3>
+  <p>This card has a border.</p>
+</el-dm-card>
+```
+
+### Filled
+
+The filled variant has a solid background color.
+
+```html
+<el-dm-card variant="filled">
+  <h3>Filled Card</h3>
+  <p>This card has a filled background.</p>
+</el-dm-card>
+```
+
+## Padding
+
+<ComponentDemo title="Card Padding Options">
+  <el-dm-card padding="sm" variant="outlined" style="width: 150px;">
+    <span>Small</span>
+  </el-dm-card>
+  <el-dm-card padding="md" variant="outlined" style="width: 150px;">
+    <span>Medium</span>
+  </el-dm-card>
+  <el-dm-card padding="lg" variant="outlined" style="width: 150px;">
+    <span>Large</span>
+  </el-dm-card>
+</ComponentDemo>
+
+```html
+<el-dm-card padding="none">No padding</el-dm-card>
+<el-dm-card padding="sm">Small padding</el-dm-card>
+<el-dm-card padding="md">Medium padding</el-dm-card>
+<el-dm-card padding="lg">Large padding</el-dm-card>
+```
+
+## Interactive Cards
+
+For clickable cards, add the `interactive` attribute:
+
+<ComponentDemo title="Interactive Card">
+  <el-dm-card interactive style="width: 250px;">
+    <h4 style="margin-top: 0;">Clickable Card</h4>
+    <p style="margin-bottom: 0;">Hover to see the effect.</p>
+  </el-dm-card>
+</ComponentDemo>
+
+```html
+<el-dm-card interactive>
+  <h3>Clickable Card</h3>
+  <p>Hover to see the effect.</p>
+</el-dm-card>
+```
+
+## Slots
+
+The card component uses the default slot for content:
+
+```html
+<el-dm-card>
+  <!-- Header -->
+  <header>
+    <h3>Card Header</h3>
+  </header>
+
+  <!-- Body -->
+  <div class="card-body">
+    <p>Main content area</p>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <el-dm-button>Action</el-dm-button>
+  </footer>
+</el-dm-card>
+```
+
+## CSS Custom Properties
+
+| Property | Default | Description |
+|----------|---------|-------------|
+| `--card-padding` | `1rem` | Internal padding |
+| `--card-border-radius` | `0.5rem` | Border radius |
+| `--card-shadow` | `0 1px 3px rgba(0,0,0,0.12)` | Box shadow for elevated variant |
+| `--card-border-color` | `var(--color-outline)` | Border color for outlined variant |
+| `--card-background` | `var(--color-surface)` | Background color |
+
+## Accessibility
+
+- Use semantic HTML elements inside the card
+- Provide meaningful headings for screen readers
+- If interactive, ensure keyboard navigation works properly

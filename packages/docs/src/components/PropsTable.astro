@@ -1,0 +1,78 @@
+---
+interface Prop {
+  name: string;
+  type: string;
+  default?: string;
+  description: string;
+}
+
+interface Props {
+  props: Prop[];
+}
+
+const { props } = Astro.props;
+---
+
+<div class="props-table-wrapper">
+  <table class="props-table">
+    <thead>
+      <tr>
+        <th>Property</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {props.map((prop) => (
+        <tr>
+          <td><code>{prop.name}</code></td>
+          <td><code class="type">{prop.type}</code></td>
+          <td>{prop.default ? <code>{prop.default}</code> : '—'}</td>
+          <td>{prop.description}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .props-table-wrapper {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+
+  .props-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .props-table th,
+  .props-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--color-outline, #e0e0e0);
+  }
+
+  .props-table th {
+    font-weight: 600;
+    background-color: var(--color-surface-variant, #f5f5f5);
+    white-space: nowrap;
+  }
+
+  .props-table code {
+    background-color: var(--color-surface-variant, #f0f0f0);
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-size: 0.8125rem;
+  }
+
+  .props-table code.type {
+    color: var(--color-primary);
+  }
+
+  .props-table tr:hover {
+    background-color: var(--color-surface-variant, #f5f5f5);
+  }
+</style>

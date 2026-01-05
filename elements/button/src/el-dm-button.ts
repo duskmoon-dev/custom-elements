@@ -48,9 +48,7 @@ export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'ghost' | 'ou
 export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg';
 
 // Strip @layer wrapper for Shadow DOM compatibility and add host styles
-const coreStyles = buttonCSS
-  .replace(/@layer\s+components\s*\{/, '')
-  .replace(/\}\s*$/, '');
+const coreStyles = buttonCSS.replace(/@layer\s+components\s*\{/, '').replace(/\}\s*$/, '');
 
 const styles = css`
   :host {
