@@ -1,12 +1,13 @@
 <!--
 Sync Impact Report
 ==================
-Version change: N/A (initial) → 1.0.0
+Version change: 1.0.0 → 1.1.0
+Modified principles:
+  - Principle V: "Accessibility and Theming" updated --dm-* prefix to --color-* naming
 Added sections:
-  - Core Principles (5 principles)
-  - Technology Standards
-  - Development Workflow
-  - Governance
+  - Principle VI: Design System Bridge (new principle)
+  - Project Mission statement
+Removed sections: None
 Templates requiring updates:
   - .specify/templates/plan-template.md: ✅ No changes needed (generic template)
   - .specify/templates/spec-template.md: ✅ No changes needed (generic template)
@@ -15,6 +16,13 @@ Follow-up TODOs: None
 -->
 
 # DuskMoon Elements Constitution
+
+## Project Mission
+
+DuskMoon Elements is a custom web components library that bridges the design system defined in
+`@duskmoon-dev/core` to real-world projects. It provides framework-agnostic, reusable UI
+components that consume and apply the core design tokens (colors, typography, spacing) through
+native Web Components APIs.
 
 ## Core Principles
 
@@ -72,11 +80,30 @@ Elements MUST be accessible and customizable through CSS custom properties.
 
 - Elements MUST follow WAI-ARIA guidelines where applicable
 - All interactive elements MUST be keyboard navigable
-- Theming MUST use CSS custom properties with `--dm-*` prefix
-- Default theme values MUST be provided but overridable
+- Theming MUST use CSS custom properties with `--color-*` naming convention (inherited from
+  `@duskmoon-dev/core`)
+- CSS custom properties MUST inherit from the light DOM; elements MUST NOT define fallback
+  values that create self-referential declarations in Shadow DOM
+- Default theme values are provided by `@duskmoon-dev/core` and consumed by elements
 
 **Rationale**: Accessibility is non-negotiable for a component library. CSS custom properties
-provide a stable theming API without JavaScript overhead.
+provide a stable theming API without JavaScript overhead. Inheriting from light DOM ensures
+consistent theming across the application.
+
+### VI. Design System Bridge
+
+Elements MUST consume and apply CSS styles from `@duskmoon-dev/core`.
+
+- Elements MUST use class-based styling from `@duskmoon-dev/core` (e.g., `.btn`, `.card`,
+  `.input`, `.markdown-body`)
+- Elements MUST NOT duplicate or override core design tokens; they MUST inherit them
+- CSS layers from `@duskmoon-dev/core` MUST be stripped (via `stripLayers: true`) for Shadow
+  DOM compatibility
+- Version updates to `@duskmoon-dev/core` SHOULD be tested and adopted promptly
+
+**Rationale**: This library exists to bridge the design system to real projects. Consuming
+styles from `@duskmoon-dev/core` ensures visual consistency and reduces maintenance burden.
+Changes to the design system automatically propagate to all elements.
 
 ## Technology Standards
 
@@ -86,6 +113,7 @@ provide a stable theming API without JavaScript overhead.
 - **Language**: TypeScript (ES2022+ target)
 - **Package Manager**: Bun workspaces for monorepo management
 - **Build Output**: Dual ESM/CJS with `.d.ts` type declarations
+- **Design System**: `@duskmoon-dev/core` for CSS styles and design tokens
 
 ### Browser Support
 
@@ -148,4 +176,4 @@ elements/<name>/
 - CLAUDE.md provides runtime development guidance and MUST align with this constitution
 - Deviations require explicit justification in the PR description
 
-**Version**: 1.0.0 | **Ratified**: 2025-12-31 | **Last Amended**: 2025-12-31
+**Version**: 1.1.0 | **Ratified**: 2025-12-31 | **Last Amended**: 2026-01-05
