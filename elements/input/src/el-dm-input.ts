@@ -61,9 +61,7 @@ const VALIDATION_CLASSES: Record<string, string> = {
 };
 
 // Strip @layer wrapper for Shadow DOM compatibility
-const coreStyles = inputCSS
-  .replace(/@layer\s+components\s*\{/, '')
-  .replace(/\}\s*$/, '');
+const coreStyles = inputCSS.replace(/@layer\s+components\s*\{/, '').replace(/\}\s*$/, '');
 
 const styles = css`
   :host {
@@ -105,7 +103,9 @@ const styles = css`
     border: 1px solid var(--color-outline);
     border-radius: 0.5rem;
     background-color: var(--color-surface);
-    transition: border-color 150ms ease-in-out, box-shadow 150ms ease-in-out;
+    transition:
+      border-color 150ms ease-in-out,
+      box-shadow 150ms ease-in-out;
   }
 
   .input-wrapper:hover:not(.disabled) {

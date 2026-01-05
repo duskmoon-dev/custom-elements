@@ -58,9 +58,7 @@ import { atomOneLight } from './themes/atom-one-light.js';
 export type MarkdownTheme = 'github' | 'atom-one-dark' | 'atom-one-light' | 'auto';
 
 // Strip @layer wrapper for Shadow DOM compatibility
-const coreStyles = markdownBodyCSS
-  .replace(/@layer\s+components\s*\{/, '')
-  .replace(/\}\s*$/, '');
+const coreStyles = markdownBodyCSS.replace(/@layer\s+components\s*\{/, '').replace(/\}\s*$/, '');
 
 const baseStyles = css`
   :host {
