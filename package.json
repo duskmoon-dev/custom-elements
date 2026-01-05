@@ -36,6 +36,7 @@
     "playground:preview": "bun run --filter @duskmoon-dev/playground preview"
   },
   "devDependencies": {
+    "@duskmoon-dev/core": "1.1.0",
     "@eslint/js": "9.39.2",
     "@types/bun": "^1.1.14",
     "del-cli": "7.0.0",

@@ -2,6 +2,7 @@
  * DuskMoon Card Element
  *
  * A container component with header, body, and footer sections.
+ * Uses styles from @duskmoon-dev/core for consistent theming.
  *
  * @element el-dm-card
  *
@@ -21,15 +22,10 @@
  * @csspart media - The media section
  *
  * @fires click - Fired when interactive card is clicked
- *
- * @cssprop --dm-card-padding - Card padding
- * @cssprop --dm-card-border-radius - Border radius
- * @cssprop --dm-card-background - Background color
- * @cssprop --dm-card-border-color - Border color (for outlined variant)
- * @cssprop --dm-card-shadow - Box shadow (for elevated variant)
  */
 
 import { BaseElement, css } from '@duskmoon-dev/el-core';
+import { css as cardCSS } from '@duskmoon-dev/core/components/card';
 
 /**
  * Card variant options
@@ -41,6 +37,18 @@ export type CardVariant = 'elevated' | 'outlined' | 'filled';
  */
 export type CardPadding = 'none' | 'sm' | 'md' | 'lg';
 
+// Map of variant attribute values to CSS classes
+const VARIANT_CLASSES: Record<string, string> = {
+  elevated: 'card-elevated',
+  outlined: 'card-bordered',
+  filled: '', // default card style
+};
+
+// Strip @layer wrapper for Shadow DOM compatibility
+const coreStyles = cardCSS
+  .replace(/@layer\s+components\s*\{/, '')
+  .replace(/\}\s*$/, '');
+
 const styles = css`
   :host {
     display: block;
@@ -50,155 +58,56 @@ const styles = css`
     display: none !important;
   }
 
-  .card {
-    display: flex;
-    flex-direction: column;
-    border-radius: var(--dm-card-border-radius, var(--dm-radius-lg, 0.75rem));
-    background-color: var(--dm-card-background, white);
-    overflow: hidden;
-    transition:
-      box-shadow var(--dm-transition-normal, 200ms ease),
-      transform var(--dm-transition-normal, 200ms ease);
-  }
+  /* Import core card styles */
+  ${coreStyles}
 
-  /* Elevated variant (default) */
-  :host(:not([variant])) .card,
-  :host([variant='elevated']) .card {
-    box-shadow: var(--dm-card-shadow, var(--dm-shadow-md, 0 4px 6px -1px rgb(0 0 0 / 0.1)));
-  }
+  /* Web component specific adjustments */
 
-  /* Outlined variant */
-  :host([variant='outlined']) .card {
-    border: 1px solid var(--dm-card-border-color, var(--dm-gray-200, #e5e7eb));
-    box-shadow: none;
-  }
-
-  /* Filled variant */
-  :host([variant='filled']) .card {
-    background-color: var(--dm-card-background, var(--dm-gray-50, #f9fafb));
-    box-shadow: none;
-  }
-
-  /* Interactive styles */
-  :host([interactive]) .card {
-    cursor: pointer;
-  }
-
-  :host([interactive]) .card:hover {
-    transform: translateY(-2px);
-  }
-
-  :host([interactive][variant='elevated']) .card:hover,
-  :host([interactive]:not([variant])) .card:hover {
-    box-shadow: var(--dm-shadow-lg, 0 10px 15px -3px rgb(0 0 0 / 0.1));
-  }
-
-  :host([interactive][variant='outlined']) .card:hover {
-    border-color: var(--dm-primary, #3b82f6);
-  }
-
-  :host([interactive][variant='filled']) .card:hover {
-    background-color: var(--dm-gray-100, #f3f4f6);
-  }
-
-  :host([interactive]) .card:focus-visible {
-    outline: none;
-    box-shadow: var(--dm-focus-ring-offset, 0 0 0 2px white, 0 0 0 4px var(--dm-primary, #3b82f6));
-  }
-
-  /* Media slot */
-  .media {
+  /* Media slot handling */
+  .card-image {
     display: none;
   }
 
-  .media.has-content {
+  .card-image.has-content {
     display: block;
   }
 
-  .media ::slotted(*) {
+  .card-image ::slotted(*) {
     display: block;
     width: 100%;
     object-fit: cover;
   }
 
-  /* Header */
-  .header {
+  /* Header slot handling */
+  .card-header {
     display: none;
-    padding: var(--dm-card-padding, var(--dm-spacing-md, 1rem));
-    padding-bottom: 0;
   }
 
-  .header.has-content {
-    display: block;
+  .card-header.has-content {
+    display: flex;
   }
 
-  /* Body */
-  .body {
-    flex: 1;
+  /* Footer slot handling */
+  .card-footer {
+    display: none;
+  }
+
+  .card-footer.has-content {
+    display: flex;
   }
 
   /* Padding variants */
-  :host(:not([padding])) .body,
-  :host([padding='md']) .body {
-    padding: var(--dm-card-padding, var(--dm-spacing-md, 1rem));
-  }
-
-  :host([padding='none']) .body {
+  :host([padding='none']) .card-body {
     padding: 0;
   }
 
-  :host([padding='sm']) .body {
-    padding: var(--dm-card-padding, var(--dm-spacing-sm, 0.5rem));
+  :host([padding='lg']) .card-body {
+    --card-p: 2rem;
   }
 
-  :host([padding='lg']) .body {
-    padding: var(--dm-card-padding, var(--dm-spacing-lg, 1.5rem));
-  }
-
-  :host(:not([padding])) .header,
-  :host([padding='md']) .header {
-    padding: var(--dm-card-padding, var(--dm-spacing-md, 1rem));
-    padding-bottom: 0;
-  }
-
-  :host([padding='sm']) .header {
-    padding: var(--dm-card-padding, var(--dm-spacing-sm, 0.5rem));
-    padding-bottom: 0;
-  }
-
-  :host([padding='lg']) .header {
-    padding: var(--dm-card-padding, var(--dm-spacing-lg, 1.5rem));
-    padding-bottom: 0;
-  }
-
-  /* Footer */
-  .footer {
-    display: none;
-    padding: var(--dm-card-padding, var(--dm-spacing-md, 1rem));
-    padding-top: 0;
-    border-top: 1px solid var(--dm-gray-100, #f3f4f6);
-    margin-top: var(--dm-spacing-md, 1rem);
-  }
-
-  .footer.has-content {
-    display: block;
-  }
-
-  :host([padding='sm']) .footer {
-    padding: var(--dm-card-padding, var(--dm-spacing-sm, 0.5rem));
-    padding-top: 0;
-    margin-top: var(--dm-spacing-sm, 0.5rem);
-  }
-
-  :host([padding='lg']) .footer {
-    padding: var(--dm-card-padding, var(--dm-spacing-lg, 1.5rem));
-    padding-top: 0;
-    margin-top: var(--dm-spacing-lg, 1.5rem);
-  }
-
-  :host([padding='none']) .footer {
-    padding: var(--dm-spacing-md, 1rem);
-    margin-top: 0;
+  :host([padding='lg']) .card-header,
+  :host([padding='lg']) .card-footer {
+    --card-p: 2rem;
   }
 `;
 
@@ -240,8 +149,18 @@ export class ElDmCard extends BaseElement {
    */
   private _handleSlotChange(event: Event): void {
     const slot = event.target as HTMLSlotElement;
-    const slotName = slot.name || 'body';
-    const wrapper = this.shadowRoot.querySelector(`.${slotName}`);
+    const slotName = slot.name;
+
+    // Map slot names to wrapper class names
+    const wrapperMap: Record<string, string> = {
+      media: 'card-image',
+      header: 'card-header',
+      footer: 'card-footer',
+      '': 'card-body',
+    };
+
+    const wrapperClass = wrapperMap[slotName] || 'card-body';
+    const wrapper = this.shadowRoot.querySelector(`.${wrapperClass}`);
 
     if (wrapper) {
       const hasContent = slot.assignedNodes().length > 0;
@@ -267,19 +186,45 @@ export class ElDmCard extends BaseElement {
     }
   }
 
+  /**
+   * Build CSS class string for the card
+   */
+  private _getCardClasses(): string {
+    const classes = ['card'];
+
+    // Add variant class
+    if (this.variant && VARIANT_CLASSES[this.variant]) {
+      classes.push(VARIANT_CLASSES[this.variant]);
+    }
+
+    // Add interactive class
+    if (this.interactive) {
+      classes.push('card-interactive');
+    }
+
+    // Add compact class for small padding
+    if (this.padding === 'sm') {
+      classes.push('card-compact');
+    }
+
+    return classes.filter(Boolean).join(' ');
+  }
+
   render(): string {
+    const cardClasses = this._getCardClasses();
+
     return `
-      <div class="card" part="card">
-        <div class="media" part="media">
+      <div class="${cardClasses}" part="card">
+        <div class="card-image" part="media">
           <slot name="media"></slot>
         </div>
-        <div class="header" part="header">
+        <div class="card-header" part="header">
           <slot name="header"></slot>
         </div>
-        <div class="body" part="body">
+        <div class="card-body" part="body">
           <slot></slot>
         </div>
-        <div class="footer" part="footer">
+        <div class="card-footer" part="footer">
           <slot name="footer"></slot>
         </div>
       </div>

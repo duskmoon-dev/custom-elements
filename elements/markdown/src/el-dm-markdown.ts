@@ -40,6 +40,7 @@
  */
 
 import { BaseElement, css } from '@duskmoon-dev/el-core';
+import { css as markdownBodyCSS } from '@duskmoon-dev/core/components/markdown-body';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import remarkGfm from 'remark-gfm';
@@ -56,217 +57,47 @@ import { atomOneLight } from './themes/atom-one-light.js';
  */
 export type MarkdownTheme = 'github' | 'atom-one-dark' | 'atom-one-light' | 'auto';
 
+// Strip @layer wrapper for Shadow DOM compatibility
+const coreStyles = markdownBodyCSS
+  .replace(/@layer\s+components\s*\{/, '')
+  .replace(/\}\s*$/, '');
+
 const baseStyles = css`
   :host {
     display: block;
     font-family: var(
       --dm-markdown-font-family,
-      var(--dm-font-family, system-ui, -apple-system, sans-serif)
+      var(--font-family, system-ui, -apple-system, sans-serif)
     );
     line-height: var(--dm-markdown-line-height, 1.6);
-    color: var(--dm-gray-900, #111827);
+    color: var(--color-on-surface);
   }
 
   :host([hidden]) {
     display: none !important;
   }
 
+  /* Import core markdown-body styles */
+  ${coreStyles}
+
   .container {
     width: 100%;
   }
 
-  .content {
+  .markdown-body {
     overflow-wrap: break-word;
     word-wrap: break-word;
   }
 
-  /* Typography */
-  .content h1,
-  .content h2,
-  .content h3,
-  .content h4,
-  .content h5,
-  .content h6 {
-    margin-top: 1.5em;
-    margin-bottom: 0.5em;
-    font-weight: var(--dm-font-weight-semibold, 600);
-    line-height: 1.25;
-  }
-
-  .content h1 {
-    font-size: 2em;
-  }
-  .content h2 {
-    font-size: 1.5em;
-    border-bottom: 1px solid var(--dm-gray-200, #e5e7eb);
-    padding-bottom: 0.3em;
-  }
-  .content h3 {
-    font-size: 1.25em;
-  }
-  .content h4 {
-    font-size: 1em;
-  }
-  .content h5 {
-    font-size: 0.875em;
-  }
-  .content h6 {
-    font-size: 0.85em;
-    color: var(--dm-gray-500, #6b7280);
-  }
-
-  .content p {
-    margin-top: 0;
-    margin-bottom: 1em;
-  }
-
-  .content a {
-    color: var(--dm-primary, #3b82f6);
-    text-decoration: none;
-  }
-
-  .content a:hover {
-    text-decoration: underline;
-  }
-
-  /* Lists */
-  .content ul,
-  .content ol {
-    margin-top: 0;
-    margin-bottom: 1em;
-    padding-left: 2em;
-  }
-
-  .content li {
-    margin-bottom: 0.25em;
-  }
-
-  .content li > * {
-    display: inline;
-  }
-
-  .content li > ul,
-  .content li > ol {
-    display: block;
-    margin-top: 0.25em;
-    margin-bottom: 0;
-  }
-
-  /* Task lists (GFM) */
-  .content ul.contains-task-list {
-    list-style: none;
-    padding-left: 1em;
-  }
-
-  .content .task-list-item {
-    display: flex;
-    align-items: baseline;
-    gap: 0.5em;
-  }
-
-  .content .task-list-item input[type='checkbox'] {
-    margin: 0;
-  }
-
-  /* Code */
-  .content code {
-    font-family: var(
-      --dm-markdown-code-font-family,
-      ui-monospace,
-      SFMono-Regular,
-      Menlo,
-      Monaco,
-      Consolas,
-      monospace
-    );
-    font-size: 0.875em;
-    padding: 0.2em 0.4em;
-    background-color: var(--dm-gray-100, #f3f4f6);
-    border-radius: var(--dm-radius-sm, 0.25rem);
-  }
-
-  .content pre {
-    margin-top: 0;
-    margin-bottom: 1em;
-    padding: 1em;
-    overflow-x: auto;
-    border-radius: var(--dm-radius-md, 0.5rem);
-    background-color: var(--dm-gray-100, #f3f4f6);
-  }
-
-  .content pre code {
-    padding: 0;
-    background-color: transparent;
-    font-size: 0.875em;
-    line-height: 1.5;
-  }
-
-  /* Blockquote */
-  .content blockquote {
-    margin: 0 0 1em;
-    padding: 0.5em 1em;
-    border-left: 4px solid var(--dm-gray-300, #d1d5db);
-    color: var(--dm-gray-600, #4b5563);
-    background-color: var(--dm-gray-50, #f9fafb);
-  }
-
-  .content blockquote > :first-child {
-    margin-top: 0;
-  }
-
-  .content blockquote > :last-child {
-    margin-bottom: 0;
-  }
-
-  /* Tables */
-  .content table {
-    width: 100%;
-    margin-bottom: 1em;
-    border-collapse: collapse;
-    border-spacing: 0;
-  }
-
-  .content th,
-  .content td {
-    padding: 0.5em 1em;
-    border: 1px solid var(--dm-gray-300, #d1d5db);
-    text-align: left;
-  }
-
-  .content th {
-    font-weight: var(--dm-font-weight-semibold, 600);
-    background-color: var(--dm-gray-50, #f9fafb);
-  }
-
-  .content tr:nth-child(even) {
-    background-color: var(--dm-gray-50, #f9fafb);
-  }
-
-  /* Horizontal rule */
-  .content hr {
-    height: 0.25em;
-    margin: 1.5em 0;
-    padding: 0;
-    background-color: var(--dm-gray-200, #e5e7eb);
-    border: 0;
-  }
-
-  /* Images */
-  .content img {
-    max-width: 100%;
-    height: auto;
-    border-radius: var(--dm-radius-md, 0.5rem);
-  }
-
   /* Mermaid diagrams */
-  .content .language-mermaid {
+  .markdown-body .language-mermaid {
     display: flex;
     justify-content: center;
     background: transparent !important;
     padding: 1em 0;
   }
 
-  .content .language-mermaid svg {
+  .markdown-body .language-mermaid svg {
     max-width: 100%;
     height: auto;
   }
@@ -277,7 +108,7 @@ const baseStyles = css`
     align-items: center;
     justify-content: center;
     padding: 2em;
-    color: var(--dm-gray-500, #6b7280);
+    color: var(--color-on-surface-variant);
   }
 
   .loading::after {
@@ -285,8 +116,8 @@ const baseStyles = css`
     width: 1.5em;
     height: 1.5em;
     margin-left: 0.5em;
-    border: 2px solid var(--dm-gray-300, #d1d5db);
-    border-top-color: var(--dm-primary, #3b82f6);
+    border: 2px solid var(--color-outline);
+    border-top-color: var(--color-primary);
     border-radius: 50%;
     animation: spin 0.6s linear infinite;
   }
@@ -300,10 +131,10 @@ const baseStyles = css`
   /* Error state */
   .error {
     padding: 1em;
-    color: var(--dm-error, #ef4444);
-    background-color: #fef2f2;
-    border: 1px solid #fecaca;
-    border-radius: var(--dm-radius-md, 0.5rem);
+    color: var(--color-error);
+    background-color: oklch(95% 0.05 25);
+    border: 1px solid oklch(85% 0.1 25);
+    border-radius: 0.5rem;
   }
 
   /* Streaming cursor */
@@ -311,7 +142,7 @@ const baseStyles = css`
     display: inline-block;
     width: 2px;
     height: 1.2em;
-    background-color: var(--dm-primary, #3b82f6);
+    background-color: var(--color-primary);
     margin-left: 2px;
     vertical-align: text-bottom;
     animation: cursor-blink 1s step-end infinite;
@@ -926,7 +757,7 @@ export class ElDmMarkdown extends BaseElement {
 
     return `
       <div class="container" part="container">
-        <div class="content" part="content">${this._fragment}${cursorHtml}</div>
+        <div class="content markdown-body" part="content">${this._fragment}${cursorHtml}</div>
       </div>
     `;
   }

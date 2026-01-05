@@ -45,6 +45,10 @@ export default defineConfig({
       },
     }),
   ],
+  optimizeDeps: {
+    // Don't pre-bundle @duskmoon-dev/core so changes are picked up on reinstall
+    exclude: ['@duskmoon-dev/core'],
+  },
   server: {
     host: '0.0.0.0',
     port: 4220,

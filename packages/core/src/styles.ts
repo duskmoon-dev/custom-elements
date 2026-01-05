@@ -66,10 +66,10 @@ export function combineStyles(...sheets: CSSStyleSheet[]): CSSStyleSheet[] {
  * @example
  * ```ts
  * const vars = cssVars({
- *   'dm-primary': '#3b82f6',
- *   'dm-spacing': '1rem'
+ *   'color-primary': 'oklch(60% 0.15 250)',
+ *   'spacing-md': '1rem'
  * });
- * // Returns: '--dm-primary: #3b82f6; --dm-spacing: 1rem;'
+ * // Returns: '--color-primary: oklch(60% 0.15 250); --spacing-md: 1rem;'
  * ```
  *
  * @param vars - Object of variable names to values
@@ -83,72 +83,81 @@ export function cssVars(vars: Record<string, string | number>): string {
 
 /**
  * Default theme CSS custom properties
+ * Uses --color-* naming to be compatible with @duskmoon-dev/core
  */
 export const defaultTheme = css`
   :host {
-    /* Colors */
-    --dm-primary: #3b82f6;
-    --dm-primary-hover: #2563eb;
-    --dm-primary-active: #1d4ed8;
-    --dm-secondary: #6b7280;
-    --dm-secondary-hover: #4b5563;
-    --dm-secondary-active: #374151;
-    --dm-success: #22c55e;
-    --dm-warning: #f59e0b;
-    --dm-error: #ef4444;
-    --dm-info: #3b82f6;
+    /* Primary colors */
+    --color-primary: oklch(60% 0.15 250);
+    --color-primary-content: white;
+    --color-on-primary: white;
 
-    /* Neutrals */
-    --dm-gray-50: #f9fafb;
-    --dm-gray-100: #f3f4f6;
-    --dm-gray-200: #e5e7eb;
-    --dm-gray-300: #d1d5db;
-    --dm-gray-400: #9ca3af;
-    --dm-gray-500: #6b7280;
-    --dm-gray-600: #4b5563;
-    --dm-gray-700: #374151;
-    --dm-gray-800: #1f2937;
-    --dm-gray-900: #111827;
+    /* Secondary colors */
+    --color-secondary: oklch(55% 0.1 250);
+    --color-secondary-content: white;
+    --color-on-secondary: white;
+
+    /* Tertiary colors */
+    --color-tertiary: oklch(50% 0.12 300);
+    --color-tertiary-content: white;
+    --color-on-tertiary: white;
+
+    /* Surface colors */
+    --color-surface: white;
+    --color-surface-container: oklch(97% 0.01 250);
+    --color-surface-container-low: oklch(98% 0.005 250);
+    --color-on-surface: oklch(25% 0.02 250);
+    --color-on-surface-variant: oklch(45% 0.02 250);
+
+    /* Outline colors */
+    --color-outline: oklch(75% 0.02 250);
+    --color-outline-variant: oklch(85% 0.01 250);
+
+    /* Semantic colors */
+    --color-success: oklch(60% 0.15 145);
+    --color-warning: oklch(75% 0.15 85);
+    --color-error: oklch(55% 0.2 25);
+    --color-info: oklch(60% 0.15 250);
 
     /* Typography */
-    --dm-font-family: system-ui, -apple-system, sans-serif;
-    --dm-font-size-xs: 0.75rem;
-    --dm-font-size-sm: 0.875rem;
-    --dm-font-size-md: 1rem;
-    --dm-font-size-lg: 1.125rem;
-    --dm-font-size-xl: 1.25rem;
-    --dm-font-weight-normal: 400;
-    --dm-font-weight-medium: 500;
-    --dm-font-weight-semibold: 600;
-    --dm-font-weight-bold: 700;
+    --font-family: system-ui, -apple-system, sans-serif;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
 
     /* Spacing */
-    --dm-spacing-xs: 0.25rem;
-    --dm-spacing-sm: 0.5rem;
-    --dm-spacing-md: 1rem;
-    --dm-spacing-lg: 1.5rem;
-    --dm-spacing-xl: 2rem;
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
 
     /* Border Radius */
-    --dm-radius-sm: 0.25rem;
-    --dm-radius-md: 0.5rem;
-    --dm-radius-lg: 0.75rem;
-    --dm-radius-xl: 1rem;
-    --dm-radius-full: 9999px;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-full: 9999px;
 
     /* Shadows */
-    --dm-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --dm-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-    --dm-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
 
     /* Transitions */
-    --dm-transition-fast: 150ms ease;
-    --dm-transition-normal: 200ms ease;
-    --dm-transition-slow: 300ms ease;
+    --transition-fast: 150ms ease;
+    --transition-normal: 200ms ease;
+    --transition-slow: 300ms ease;
 
     /* Focus */
-    --dm-focus-ring: 0 0 0 2px var(--dm-primary);
-    --dm-focus-ring-offset: 0 0 0 2px white, 0 0 0 4px var(--dm-primary);
+    --focus-ring: 0 0 0 2px var(--color-primary);
+    --focus-ring-offset: 0 0 0 2px white, 0 0 0 4px var(--color-primary);
   }
 `;
 
@@ -163,7 +172,7 @@ export const resetStyles = css`
   }
 
   :host {
-    font-family: var(--dm-font-family, system-ui, -apple-system, sans-serif);
+    font-family: var(--font-family, system-ui, -apple-system, sans-serif);
   }
 
   :host([hidden]) {

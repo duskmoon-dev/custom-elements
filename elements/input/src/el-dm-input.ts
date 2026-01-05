@@ -2,6 +2,7 @@
  * DuskMoon Input Element
  *
  * A text input component with label and validation states.
+ * Uses styles from @duskmoon-dev/core for consistent theming.
  *
  * @element el-dm-input
  *
@@ -34,22 +35,35 @@
  * @fires dm-change - Fired when value changes and input loses focus
  * @fires dm-focus - Fired when input gains focus
  * @fires dm-blur - Fired when input loses focus
- *
- * @cssprop --dm-input-height - Input height
- * @cssprop --dm-input-padding-x - Horizontal padding
- * @cssprop --dm-input-font-size - Font size
- * @cssprop --dm-input-border-radius - Border radius
- * @cssprop --dm-input-border-color - Border color
- * @cssprop --dm-input-focus-border-color - Border color when focused
  */
 
 import { BaseElement, css } from '@duskmoon-dev/el-core';
+import { css as inputCSS } from '@duskmoon-dev/core/components/input';
 import type { Size, ValidationState } from '@duskmoon-dev/el-core';
 
 /**
  * Supported input types
  */
 export type InputType = 'text' | 'password' | 'email' | 'number' | 'tel' | 'url' | 'search';
+
+// Map of size attribute values to CSS classes
+const SIZE_CLASSES: Record<string, string> = {
+  sm: 'input-sm',
+  md: '',
+  lg: 'input-lg',
+};
+
+// Map of validation state to CSS classes
+const VALIDATION_CLASSES: Record<string, string> = {
+  valid: 'input-success',
+  invalid: 'input-error',
+  pending: '',
+};
+
+// Strip @layer wrapper for Shadow DOM compatibility
+const coreStyles = inputCSS
+  .replace(/@layer\s+components\s*\{/, '')
+  .replace(/\}\s*$/, '');
 
 const styles = css`
   :host {
@@ -60,113 +74,103 @@ const styles = css`
     display: none !important;
   }
 
+  /* Import core input styles */
+  ${coreStyles}
+
+  /* Form field container */
   .container {
     display: flex;
     flex-direction: column;
-    gap: var(--dm-spacing-xs, 0.25rem);
+    gap: 0.25rem;
   }
 
   /* Label */
   .label {
     display: block;
-    font-size: var(--dm-font-size-sm, 0.875rem);
-    font-weight: var(--dm-font-weight-medium, 500);
-    color: var(--dm-gray-700, #374151);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-on-surface);
   }
 
   .label.required::after {
     content: ' *';
-    color: var(--dm-error, #ef4444);
+    color: var(--color-error);
   }
 
-  /* Input wrapper */
+  /* Input wrapper for prefix/suffix */
   .input-wrapper {
     display: flex;
     align-items: center;
-    gap: var(--dm-spacing-sm, 0.5rem);
-    border: 1px solid var(--dm-input-border-color, var(--dm-gray-300, #d1d5db));
-    border-radius: var(--dm-input-border-radius, var(--dm-radius-md, 0.5rem));
-    background-color: white;
-    transition:
-      border-color var(--dm-transition-fast, 150ms ease),
-      box-shadow var(--dm-transition-fast, 150ms ease);
+    gap: 0.5rem;
+    border: 1px solid var(--color-outline);
+    border-radius: 0.5rem;
+    background-color: var(--color-surface);
+    transition: border-color 150ms ease-in-out, box-shadow 150ms ease-in-out;
   }
 
   .input-wrapper:hover:not(.disabled) {
-    border-color: var(--dm-gray-400, #9ca3af);
+    border-color: var(--color-outline-variant);
   }
 
   .input-wrapper.focused {
-    border-color: var(--dm-input-focus-border-color, var(--dm-primary, #3b82f6));
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--dm-primary, #3b82f6) 20%, transparent);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-primary) 10%, transparent);
   }
 
   .input-wrapper.disabled {
-    background-color: var(--dm-gray-100, #f3f4f6);
+    background-color: var(--color-surface-container);
     cursor: not-allowed;
+    opacity: 0.5;
   }
 
-  /* Validation states */
+  /* Validation states for wrapper */
   .input-wrapper.valid {
-    border-color: var(--dm-success, #22c55e);
+    border-color: var(--color-success);
   }
 
   .input-wrapper.valid.focused {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--dm-success, #22c55e) 20%, transparent);
+    box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-success) 10%, transparent);
   }
 
   .input-wrapper.invalid {
-    border-color: var(--dm-error, #ef4444);
+    border-color: var(--color-error);
   }
 
   .input-wrapper.invalid.focused {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--dm-error, #ef4444) 20%, transparent);
+    box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-error) 10%, transparent);
   }
 
-  /* Size variants */
+  /* Size variants for wrapper */
   :host(:not([size])) .input-wrapper,
   :host([size='md']) .input-wrapper {
-    min-height: var(--dm-input-height, 2.5rem);
-    padding: 0 var(--dm-input-padding-x, 0.75rem);
+    min-height: 2.5rem;
+    padding: 0 0.75rem;
   }
 
   :host([size='sm']) .input-wrapper {
-    min-height: var(--dm-input-height, 2rem);
-    padding: 0 var(--dm-input-padding-x, 0.5rem);
+    min-height: 2rem;
+    padding: 0 0.5rem;
   }
 
   :host([size='lg']) .input-wrapper {
-    min-height: var(--dm-input-height, 3rem);
-    padding: 0 var(--dm-input-padding-x, 1rem);
+    min-height: 3rem;
+    padding: 0 1rem;
   }
 
-  /* Native input */
-  input {
+  /* Native input - use base .input class but remove redundant styles */
+  .input-wrapper .input {
     flex: 1;
     min-width: 0;
     border: none;
     background: transparent;
-    font-family: inherit;
-    font-size: var(--dm-input-font-size, var(--dm-font-size-md, 1rem));
-    color: var(--dm-gray-900, #111827);
-    outline: none;
+    padding: 0;
+    height: auto;
   }
 
-  :host([size='sm']) input {
-    font-size: var(--dm-input-font-size, var(--dm-font-size-sm, 0.875rem));
-  }
-
-  :host([size='lg']) input {
-    font-size: var(--dm-input-font-size, var(--dm-font-size-lg, 1.125rem));
-  }
-
-  input::placeholder {
-    color: var(--dm-gray-400, #9ca3af);
-  }
-
-  input:disabled {
-    cursor: not-allowed;
-    color: var(--dm-gray-500, #6b7280);
+  .input-wrapper .input:focus,
+  .input-wrapper .input:focus-visible {
+    box-shadow: none;
+    border-color: transparent;
   }
 
   /* Prefix and suffix */
@@ -174,7 +178,7 @@ const styles = css`
   .suffix {
     display: none;
     flex-shrink: 0;
-    color: var(--dm-gray-500, #6b7280);
+    color: var(--color-on-surface-variant);
   }
 
   .prefix.has-content,
@@ -186,16 +190,16 @@ const styles = css`
   /* Helper and error text */
   .helper,
   .error {
-    font-size: var(--dm-font-size-sm, 0.875rem);
-    margin-top: var(--dm-spacing-xs, 0.25rem);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
   }
 
   .helper {
-    color: var(--dm-gray-500, #6b7280);
+    color: var(--color-on-surface-variant);
   }
 
   .error {
-    color: var(--dm-error, #ef4444);
+    color: var(--color-error);
   }
 
   /* Pending state spinner */
@@ -203,8 +207,8 @@ const styles = css`
     display: none;
     width: 1em;
     height: 1em;
-    border: 2px solid var(--dm-gray-300, #d1d5db);
-    border-top-color: var(--dm-primary, #3b82f6);
+    border: 2px solid var(--color-outline);
+    border-top-color: var(--color-primary);
     border-radius: 50%;
     animation: spin 0.6s linear infinite;
   }
@@ -359,6 +363,25 @@ export class ElDmInput extends BaseElement {
     input?.select();
   }
 
+  /**
+   * Build CSS class string for the input
+   */
+  private _getInputClasses(): string {
+    const classes = ['input', 'input-bordered'];
+
+    // Add size class
+    if (this.size && SIZE_CLASSES[this.size]) {
+      classes.push(SIZE_CLASSES[this.size]);
+    }
+
+    // Add validation class
+    if (this.validationState && VALIDATION_CLASSES[this.validationState]) {
+      classes.push(VALIDATION_CLASSES[this.validationState]);
+    }
+
+    return classes.filter(Boolean).join(' ');
+  }
+
   protected update(): void {
     super.update();
 
@@ -383,7 +406,7 @@ export class ElDmInput extends BaseElement {
       .join(' ');
 
     const labelClasses = ['label', this.required ? 'required' : ''].filter(Boolean).join(' ');
-
+    const inputClasses = this._getInputClasses();
     const inputId = `input-${Math.random().toString(36).slice(2, 9)}`;
 
     return `
@@ -404,6 +427,7 @@ export class ElDmInput extends BaseElement {
           </span>
 
           <input
+            class="${inputClasses}"
             id="${inputId}"
             type="${this.type || 'text'}"
             name="${this.name || ''}"

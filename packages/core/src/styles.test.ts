@@ -76,20 +76,20 @@ describe('combineStyles', () => {
 describe('cssVars', () => {
   test('creates CSS custom property declarations', () => {
     const result = cssVars({
-      'dm-primary': '#3b82f6',
-      'dm-spacing': '1rem',
+      'color-primary': 'oklch(60% 0.15 250)',
+      'spacing-md': '1rem',
     });
 
-    expect(result).toContain('--dm-primary: #3b82f6');
-    expect(result).toContain('--dm-spacing: 1rem');
+    expect(result).toContain('--color-primary: oklch(60% 0.15 250)');
+    expect(result).toContain('--spacing-md: 1rem');
   });
 
   test('handles numeric values', () => {
     const result = cssVars({
-      'dm-z-index': 100,
+      'z-index': 100,
     });
 
-    expect(result).toContain('--dm-z-index: 100');
+    expect(result).toContain('--z-index: 100');
   });
 
   test('handles empty object', () => {
