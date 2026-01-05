@@ -1,0 +1,286 @@
+---
+import { getCollection } from 'astro:content';
+import ThemeToggle from './ThemeToggle.astro';
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '' } = Astro.props;
+
+const docs = await getCollection('docs', ({ data }) => !data.draft);
+
+// Group docs by section
+const sections: Record<string, typeof docs> = {};
+docs.forEach((doc) => {
+  const section = doc.data.section;
+  if (!sections[section]) {
+    sections[section] = [];
+  }
+  sections[section].push(doc);
+});
+
+// Sort each section by order
+Object.keys(sections).forEach((section) => {
+  sections[section].sort((a, b) => (a.data.order || 999) - (b.data.order || 999));
+});
+
+// Define section order and display names
+const sectionConfig: Record<string, { order: number; label: string }> = {
+  'getting-started': { order: 1, label: 'Getting Started' },
+  'theming': { order: 2, label: 'Theming' },
+  'components': { order: 3, label: 'Components' },
+  'api': { order: 4, label: 'API' },
+};
+
+const sortedSections = Object.keys(sections).sort((a, b) => {
+  return (sectionConfig[a]?.order || 999) - (sectionConfig[b]?.order || 999);
+});
+
+function isActive(slug: string): boolean {
+  return currentPath === `/docs/${slug}` || currentPath === `/docs/${slug}/`;
+}
+---
+
+<div class="mobile-nav-wrapper">
+  <button class="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+    <svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+    <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+
+  <div class="mobile-nav-drawer" aria-hidden="true">
+    <div class="mobile-nav-header">
+      <span class="mobile-nav-title">Navigation</span>
+      <ThemeToggle />
+    </div>
+
+    <nav class="mobile-nav" aria-label="Mobile documentation navigation">
+      {sortedSections.map((section) => (
+        <div class="nav-section">
+          <h3 class="nav-section-title">{sectionConfig[section]?.label || section}</h3>
+          <ul class="nav-list">
+            {sections[section].map((doc) => (
+              <li class="nav-item">
+                <a
+                  href={`/duskmoon-elements/docs/${doc.slug}`}
+                  class:list={['nav-link', { active: isActive(doc.slug) }]}
+                  aria-current={isActive(doc.slug) ? 'page' : undefined}
+                >
+                  {doc.data.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </nav>
+  </div>
+
+  <div class="mobile-nav-backdrop" aria-hidden="true"></div>
+</div>
+
+<style>
+  .mobile-nav-wrapper {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .mobile-nav-wrapper {
+      display: block;
+    }
+  }
+
+  .mobile-nav-toggle {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 1001;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .mobile-nav-toggle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .mobile-nav-toggle:active {
+    transform: scale(0.95);
+  }
+
+  .mobile-nav-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    background-color: var(--color-surface);
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .mobile-nav-drawer.open {
+    transform: translateX(0);
+  }
+
+  .mobile-nav-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid var(--color-outline);
+  }
+
+  .mobile-nav-title {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-on-surface);
+  }
+
+  .mobile-nav-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .mobile-nav-backdrop.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .mobile-nav {
+    padding: 1rem 0;
+  }
+
+  .nav-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .nav-section-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-on-surface);
+    opacity: 0.6;
+    margin: 0 0 0.5rem 0;
+    padding: 0 1rem;
+  }
+
+  .nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-item {
+    margin: 0;
+  }
+
+  .nav-link {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: var(--color-on-surface);
+    text-decoration: none;
+    font-size: 1rem;
+    border-left: 3px solid transparent;
+    transition: all 0.15s ease;
+  }
+
+  .nav-link:hover {
+    background-color: var(--color-surface-variant);
+    color: var(--color-primary);
+  }
+
+  .nav-link.active {
+    background-color: var(--color-primary-container);
+    color: var(--color-primary);
+    border-left-color: var(--color-primary);
+    font-weight: 500;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.querySelector('.mobile-nav-toggle') as HTMLButtonElement;
+    const drawer = document.querySelector('.mobile-nav-drawer') as HTMLElement;
+    const backdrop = document.querySelector('.mobile-nav-backdrop') as HTMLElement;
+    const menuIcon = toggle?.querySelector('.menu-icon') as SVGElement;
+    const closeIcon = toggle?.querySelector('.close-icon') as SVGElement;
+
+    if (!toggle || !drawer || !backdrop) return;
+
+    let isOpen = false;
+
+    function openDrawer() {
+      isOpen = true;
+      drawer.classList.add('open');
+      backdrop.classList.add('visible');
+      toggle.setAttribute('aria-expanded', 'true');
+      drawer.setAttribute('aria-hidden', 'false');
+      if (menuIcon) menuIcon.style.display = 'none';
+      if (closeIcon) closeIcon.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+      isOpen = false;
+      drawer.classList.remove('open');
+      backdrop.classList.remove('visible');
+      toggle.setAttribute('aria-expanded', 'false');
+      drawer.setAttribute('aria-hidden', 'true');
+      if (menuIcon) menuIcon.style.display = 'block';
+      if (closeIcon) closeIcon.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    toggle.addEventListener('click', () => {
+      if (isOpen) {
+        closeDrawer();
+      } else {
+        openDrawer();
+      }
+    });
+
+    backdrop.addEventListener('click', closeDrawer);
+
+    // Close on navigation
+    drawer.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', closeDrawer);
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        closeDrawer();
+      }
+    });
+  });
+</script>

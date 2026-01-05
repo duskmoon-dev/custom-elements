@@ -1,0 +1,54 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<div class="component-demo">
+  {title && <h4 class="demo-title">{title}</h4>}
+  {description && <p class="demo-description">{description}</p>}
+  <div class="demo-preview">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .component-demo {
+    margin: 1.5rem 0;
+    border: 1px solid var(--color-outline, #e0e0e0);
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  .demo-title {
+    margin: 0;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    background-color: var(--color-surface-variant, #f5f5f5);
+    border-bottom: 1px solid var(--color-outline, #e0e0e0);
+  }
+
+  .demo-description {
+    margin: 0;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    color: var(--color-on-surface);
+    opacity: 0.7;
+    background-color: var(--color-surface-variant, #f5f5f5);
+    border-bottom: 1px solid var(--color-outline, #e0e0e0);
+  }
+
+  .demo-preview {
+    padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-surface);
+  }
+</style>

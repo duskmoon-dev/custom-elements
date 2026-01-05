@@ -1,0 +1,192 @@
+---
+title: Markdown
+description: Markdown rendering component with syntax highlighting and Mermaid support
+order: 4
+section: components
+component: "@duskmoon-dev/el-markdown"
+---
+
+import ComponentDemo from '../../../components/ComponentDemo.astro';
+
+# Markdown
+
+The Markdown component renders markdown content with syntax highlighting, GitHub Flavored Markdown support, and optional Mermaid diagram rendering.
+
+## Installation
+
+```bash
+npm install @duskmoon-dev/el-markdown
+```
+
+For Mermaid diagram support (optional):
+
+```bash
+npm install mermaid
+```
+
+## Usage
+
+```javascript
+import '@duskmoon-dev/el-markdown/register';
+```
+
+````html
+<el-dm-markdown>
+  # Hello World
+
+  This is **bold** and *italic* text.
+</el-dm-markdown>
+````
+
+## Live Demo
+
+<ComponentDemo title="Markdown Rendering">
+  <el-dm-markdown content="# Hello World\n\nThis is **bold** and *italic* text.\n\n- List item 1\n- List item 2\n- List item 3" style="width: 100%; max-width: 500px;"></el-dm-markdown>
+</ComponentDemo>
+
+<script>
+  import('@duskmoon-dev/el-markdown/register').then(m => m.register());
+</script>
+
+## Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `content` | `string` | `''` | Markdown content to render (alternative to slot) |
+| `sanitize` | `boolean` | `true` | Sanitize HTML in markdown |
+| `highlight` | `boolean` | `true` | Enable syntax highlighting |
+| `mermaid` | `boolean` | `false` | Enable Mermaid diagram rendering |
+
+## Content Methods
+
+### Using Slot
+
+````html
+<el-dm-markdown>
+  # Heading
+
+  Content goes here.
+</el-dm-markdown>
+````
+
+### Using Property
+
+```html
+<el-dm-markdown content="# Heading\n\nContent goes here."></el-dm-markdown>
+```
+
+### Using JavaScript
+
+```javascript
+const md = document.querySelector('el-dm-markdown');
+md.content = '# Dynamic Content\n\nUpdated via JavaScript.';
+```
+
+## Features
+
+### GitHub Flavored Markdown
+
+The component supports GFM features:
+
+- Tables
+- Task lists
+- Strikethrough
+- Autolinks
+- Footnotes
+
+<ComponentDemo title="GFM Features">
+  <el-dm-markdown content="| Feature | Supported |\n|---------|-----------||\n| Tables  | ✅        |\n| Tasks   | ✅        |\n\n- [x] Task 1\n- [ ] Task 2\n\n~~Strikethrough text~~" style="width: 100%; max-width: 400px;"></el-dm-markdown>
+</ComponentDemo>
+
+````html
+<el-dm-markdown>
+  | Feature | Supported |
+  |---------|-----------|
+  | Tables  | ✅        |
+  | Tasks   | ✅        |
+
+  - [x] Task 1
+  - [ ] Task 2
+</el-dm-markdown>
+````
+
+### Syntax Highlighting
+
+Code blocks are automatically highlighted:
+
+<ComponentDemo title="Code Syntax Highlighting">
+  <el-dm-markdown content="```javascript\nfunction greet(name) {\n  console.log(`Hello, ${name}!`);\n}\n```" style="width: 100%; max-width: 500px;"></el-dm-markdown>
+</ComponentDemo>
+
+````html
+<el-dm-markdown>
+  ```javascript
+  function greet(name) {
+    console.log(`Hello, ${name}!`);
+  }
+  ```
+</el-dm-markdown>
+````
+
+### Mermaid Diagrams
+
+Enable Mermaid support for diagrams:
+
+````html
+<el-dm-markdown mermaid>
+  ```mermaid
+  graph TD
+    A[Start] --> B[Process]
+    B --> C[End]
+  ```
+</el-dm-markdown>
+````
+
+## Styling
+
+The markdown component applies styling through the `.markdown-body` class from `@duskmoon-dev/core`.
+
+### CSS Custom Properties
+
+| Property | Description |
+|----------|-------------|
+| `--dm-markdown-font-family` | Font family for content |
+| `--dm-markdown-line-height` | Line height for paragraphs |
+| `--dm-markdown-code-bg` | Background color for code blocks |
+| `--dm-markdown-link-color` | Link color |
+
+## Events
+
+| Event | Description |
+|-------|-------------|
+| `dm-rendered` | Fired after markdown is rendered |
+| `dm-error` | Fired if rendering fails |
+
+### Event Handling
+
+```javascript
+const md = document.querySelector('el-dm-markdown');
+md.addEventListener('dm-rendered', (event) => {
+  console.log('Markdown rendered:', event.detail);
+});
+```
+
+## Security
+
+By default, the component sanitizes HTML to prevent XSS attacks. You can disable this for trusted content:
+
+````html
+<el-dm-markdown sanitize="false">
+  <div class="custom-html">Custom HTML allowed</div>
+</el-dm-markdown>
+````
+
+⚠️ **Warning**: Only disable sanitization for trusted content sources.
+
+## Accessibility
+
+- Semantic HTML is generated from markdown
+- Headings maintain proper hierarchy
+- Images require alt text
+- Links are keyboard navigable
+- Code blocks have proper language labels

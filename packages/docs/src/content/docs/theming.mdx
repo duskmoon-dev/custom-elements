@@ -1,0 +1,148 @@
+---
+title: Theming
+description: Learn how to customize DuskMoon Elements with CSS custom properties
+order: 2
+section: theming
+---
+
+# Theming
+
+DuskMoon Elements uses CSS custom properties from `@duskmoon-dev/core` for theming. This allows you to customize colors, typography, and spacing across all components.
+
+## Available Themes
+
+The design system provides two built-in themes:
+
+### Moonlight (Dark Theme)
+
+```css
+@import '@duskmoon-dev/core/dist/moonlight.css';
+```
+
+```html
+<html data-theme="moonlight">
+```
+
+### Sunshine (Light Theme)
+
+```css
+@import '@duskmoon-dev/core/dist/sunshine.css';
+```
+
+```html
+<html data-theme="sunshine">
+```
+
+## CSS Custom Properties
+
+All components use these CSS custom properties for styling:
+
+### Colors
+
+| Property | Description |
+|----------|-------------|
+| `--color-primary` | Primary brand color |
+| `--color-primary-content` | Text color on primary backgrounds |
+| `--color-secondary` | Secondary accent color |
+| `--color-surface` | Background color for surfaces |
+| `--color-surface-variant` | Alternative surface color |
+| `--color-on-surface` | Text color on surfaces |
+| `--color-outline` | Border and divider color |
+| `--color-error` | Error state color |
+| `--color-success` | Success state color |
+| `--color-warning` | Warning state color |
+
+### Typography
+
+| Property | Description |
+|----------|-------------|
+| `--font-family` | Base font family |
+| `--font-size-sm` | Small text size |
+| `--font-size-base` | Default text size |
+| `--font-size-lg` | Large text size |
+
+### Spacing
+
+| Property | Description |
+|----------|-------------|
+| `--spacing-xs` | Extra small spacing (4px) |
+| `--spacing-sm` | Small spacing (8px) |
+| `--spacing-md` | Medium spacing (16px) |
+| `--spacing-lg` | Large spacing (24px) |
+| `--spacing-xl` | Extra large spacing (32px) |
+
+## Customizing the Theme
+
+Override CSS custom properties to customize the appearance:
+
+```css
+:root {
+  /* Override primary color */
+  --color-primary: oklch(55% 0.2 265);
+  --color-primary-content: white;
+
+  /* Override fonts */
+  --font-family: 'Inter', system-ui, sans-serif;
+}
+```
+
+## Theme Switching
+
+Implement theme switching with JavaScript:
+
+```javascript
+function toggleTheme() {
+  const html = document.documentElement;
+  const currentTheme = html.dataset.theme;
+  const newTheme = currentTheme === 'moonlight' ? 'sunshine' : 'moonlight';
+
+  html.dataset.theme = newTheme;
+  localStorage.setItem('duskmoon-theme', newTheme);
+}
+
+// Restore saved theme on page load
+const savedTheme = localStorage.getItem('duskmoon-theme');
+if (savedTheme) {
+  document.documentElement.dataset.theme = savedTheme;
+}
+```
+
+## Respecting System Preferences
+
+Detect the user's preferred color scheme:
+
+```javascript
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+const defaultTheme = prefersDark ? 'moonlight' : 'sunshine';
+document.documentElement.dataset.theme = defaultTheme;
+```
+
+Listen for changes:
+
+```javascript
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+  document.documentElement.dataset.theme = e.matches ? 'moonlight' : 'sunshine';
+});
+```
+
+## Component-Specific Customization
+
+Each component may have additional CSS custom properties for fine-grained control. Check individual component documentation for details.
+
+### Example: Button Customization
+
+```css
+el-dm-button {
+  --btn-padding-x: 1.5rem;
+  --btn-padding-y: 0.75rem;
+  --btn-border-radius: 0.5rem;
+}
+```
+
+## Best Practices
+
+1. **Use CSS custom properties** instead of hardcoded values
+2. **Import both theme files** if you support theme switching
+3. **Set `data-theme` on the `<html>` element** for consistent styling
+4. **Persist theme preference** in localStorage for returning users
+5. **Respect system preferences** as the initial default

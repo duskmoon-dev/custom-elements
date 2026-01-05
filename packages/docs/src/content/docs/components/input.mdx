@@ -1,0 +1,186 @@
+---
+title: Input
+description: Text input component with validation and various states
+order: 3
+section: components
+component: "@duskmoon-dev/el-input"
+---
+
+import ComponentDemo from '../../../components/ComponentDemo.astro';
+
+# Input
+
+The Input component provides a styled text input with support for validation, labels, and helper text.
+
+## Installation
+
+```bash
+npm install @duskmoon-dev/el-input
+```
+
+## Usage
+
+```javascript
+import '@duskmoon-dev/el-input/register';
+```
+
+```html
+<el-dm-input label="Email" placeholder="Enter your email"></el-dm-input>
+```
+
+## Live Demo
+
+<ComponentDemo title="Input Examples">
+  <div style="display: flex; flex-direction: column; gap: 1rem; width: 300px;">
+    <el-dm-input label="Username" placeholder="Enter username"></el-dm-input>
+    <el-dm-input label="Email" type="email" placeholder="you@example.com"></el-dm-input>
+    <el-dm-input label="Password" type="password" helper="Must be at least 8 characters"></el-dm-input>
+  </div>
+</ComponentDemo>
+
+<script>
+  import('@duskmoon-dev/el-input/register').then(m => m.register());
+</script>
+
+## Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `value` | `string` | `''` | Input value |
+| `label` | `string` | `''` | Label text |
+| `placeholder` | `string` | `''` | Placeholder text |
+| `type` | `'text' \| 'email' \| 'password' \| 'number' \| 'tel' \| 'url'` | `'text'` | Input type |
+| `disabled` | `boolean` | `false` | Disables the input |
+| `readonly` | `boolean` | `false` | Makes input read-only |
+| `required` | `boolean` | `false` | Marks as required |
+| `error` | `string` | `''` | Error message to display |
+| `helper` | `string` | `''` | Helper text below input |
+
+## Basic Examples
+
+### With Label
+
+```html
+<el-dm-input label="Username" placeholder="Enter username"></el-dm-input>
+```
+
+### With Helper Text
+
+```html
+<el-dm-input
+  label="Password"
+  type="password"
+  helper="Must be at least 8 characters"
+></el-dm-input>
+```
+
+### With Error
+
+<ComponentDemo title="Input with Error State">
+  <el-dm-input
+    label="Email"
+    type="email"
+    value="invalid-email"
+    error="Please enter a valid email address"
+    style="width: 300px;"
+  ></el-dm-input>
+</ComponentDemo>
+
+```html
+<el-dm-input
+  label="Email"
+  type="email"
+  value="invalid-email"
+  error="Please enter a valid email address"
+></el-dm-input>
+```
+
+## Input Types
+
+### Text
+
+```html
+<el-dm-input type="text" label="Name"></el-dm-input>
+```
+
+### Email
+
+```html
+<el-dm-input type="email" label="Email"></el-dm-input>
+```
+
+### Password
+
+```html
+<el-dm-input type="password" label="Password"></el-dm-input>
+```
+
+### Number
+
+```html
+<el-dm-input type="number" label="Quantity"></el-dm-input>
+```
+
+## States
+
+### Disabled
+
+<ComponentDemo title="Disabled Input">
+  <el-dm-input label="Disabled" disabled value="Cannot edit" style="width: 250px;"></el-dm-input>
+</ComponentDemo>
+
+```html
+<el-dm-input label="Disabled" disabled value="Cannot edit"></el-dm-input>
+```
+
+### Read-only
+
+<ComponentDemo title="Read-only Input">
+  <el-dm-input label="Read-only" readonly value="View only" style="width: 250px;"></el-dm-input>
+</ComponentDemo>
+
+```html
+<el-dm-input label="Read-only" readonly value="View only"></el-dm-input>
+```
+
+### Required
+
+```html
+<el-dm-input label="Required Field" required></el-dm-input>
+```
+
+## Events
+
+| Event | Description |
+|-------|-------------|
+| `input` | Fired when the value changes |
+| `change` | Fired when the value changes and input loses focus |
+| `focus` | Fired when the input receives focus |
+| `blur` | Fired when the input loses focus |
+
+### Event Handling
+
+```javascript
+const input = document.querySelector('el-dm-input');
+input.addEventListener('input', (event) => {
+  console.log('Value:', event.target.value);
+});
+```
+
+## CSS Custom Properties
+
+| Property | Default | Description |
+|----------|---------|-------------|
+| `--input-padding-x` | `0.75rem` | Horizontal padding |
+| `--input-padding-y` | `0.5rem` | Vertical padding |
+| `--input-border-radius` | `0.375rem` | Border radius |
+| `--input-border-color` | `var(--color-outline)` | Border color |
+| `--input-focus-color` | `var(--color-primary)` | Focus ring color |
+| `--input-error-color` | `var(--color-error)` | Error state color |
+
+## Accessibility
+
+- Labels are properly associated with inputs
+- Error messages are announced to screen readers
+- Focus states are clearly visible
+- Required fields are indicated with `aria-required`

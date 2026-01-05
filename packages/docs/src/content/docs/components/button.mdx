@@ -1,0 +1,157 @@
+---
+title: Button
+description: Interactive button component with multiple variants and states
+order: 1
+section: components
+component: "@duskmoon-dev/el-button"
+---
+
+import ComponentDemo from '../../../components/ComponentDemo.astro';
+
+# Button
+
+The Button component provides an interactive button with multiple variants, sizes, and states.
+
+## Installation
+
+```bash
+npm install @duskmoon-dev/el-button
+```
+
+## Usage
+
+```javascript
+import '@duskmoon-dev/el-button/register';
+```
+
+```html
+<el-dm-button variant="primary">Click me</el-dm-button>
+```
+
+## Live Demo
+
+<ComponentDemo title="Button Variants">
+  <el-dm-button variant="primary">Primary</el-dm-button>
+  <el-dm-button variant="secondary">Secondary</el-dm-button>
+  <el-dm-button variant="outline">Outline</el-dm-button>
+  <el-dm-button variant="ghost">Ghost</el-dm-button>
+</ComponentDemo>
+
+<script>
+  import('@duskmoon-dev/el-button/register').then(m => m.register());
+</script>
+
+## Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `variant` | `'primary' \| 'secondary' \| 'outline' \| 'ghost'` | `'primary'` | Visual style of the button |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size of the button |
+| `disabled` | `boolean` | `false` | Disables the button |
+| `loading` | `boolean` | `false` | Shows loading state |
+| `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | Button type attribute |
+
+## Variants
+
+### Primary
+
+The primary variant is used for main actions.
+
+```html
+<el-dm-button variant="primary">Primary</el-dm-button>
+```
+
+### Secondary
+
+The secondary variant is used for less prominent actions.
+
+```html
+<el-dm-button variant="secondary">Secondary</el-dm-button>
+```
+
+### Outline
+
+The outline variant has a transparent background with a border.
+
+```html
+<el-dm-button variant="outline">Outline</el-dm-button>
+```
+
+### Ghost
+
+The ghost variant is minimal, with no background or border.
+
+```html
+<el-dm-button variant="ghost">Ghost</el-dm-button>
+```
+
+## Sizes
+
+<ComponentDemo title="Button Sizes">
+  <el-dm-button size="sm">Small</el-dm-button>
+  <el-dm-button size="md">Medium</el-dm-button>
+  <el-dm-button size="lg">Large</el-dm-button>
+</ComponentDemo>
+
+```html
+<el-dm-button size="sm">Small</el-dm-button>
+<el-dm-button size="md">Medium</el-dm-button>
+<el-dm-button size="lg">Large</el-dm-button>
+```
+
+## States
+
+### Disabled
+
+<ComponentDemo title="Disabled State">
+  <el-dm-button disabled>Disabled</el-dm-button>
+</ComponentDemo>
+
+```html
+<el-dm-button disabled>Disabled</el-dm-button>
+```
+
+### Loading
+
+<ComponentDemo title="Loading State">
+  <el-dm-button loading>Loading</el-dm-button>
+</ComponentDemo>
+
+```html
+<el-dm-button loading>Loading</el-dm-button>
+```
+
+## Events
+
+The button component emits standard DOM events:
+
+| Event | Description |
+|-------|-------------|
+| `click` | Fired when the button is clicked |
+| `focus` | Fired when the button receives focus |
+| `blur` | Fired when the button loses focus |
+
+### Event Handling
+
+```javascript
+const button = document.querySelector('el-dm-button');
+button.addEventListener('click', (event) => {
+  console.log('Button clicked!');
+});
+```
+
+## CSS Custom Properties
+
+| Property | Default | Description |
+|----------|---------|-------------|
+| `--btn-padding-x` | `1rem` | Horizontal padding |
+| `--btn-padding-y` | `0.5rem` | Vertical padding |
+| `--btn-border-radius` | `0.375rem` | Border radius |
+| `--btn-font-weight` | `500` | Font weight |
+
+## Accessibility
+
+- The button uses native `<button>` element semantics
+- Keyboard navigation is fully supported
+- Focus states are clearly visible
+- Disabled state is properly announced to screen readers
