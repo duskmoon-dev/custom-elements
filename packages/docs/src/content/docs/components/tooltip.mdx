@@ -7,6 +7,10 @@ component: "@duskmoon-dev/el-tooltip"
 ---
 
 import ComponentDemo from '../../../components/ComponentDemo.astro';
+import RegisterElement from '../../../components/RegisterElement.astro';
+
+<RegisterElement element="@duskmoon-dev/el-tooltip" />
+<RegisterElement element="@duskmoon-dev/el-button" />
 
 # Tooltip
 
@@ -47,10 +51,6 @@ import '@duskmoon-dev/el-tooltip/register';
   </el-dm-tooltip>
 </ComponentDemo>
 
-<script>
-  import('@duskmoon-dev/el-tooltip/register');
-  import('@duskmoon-dev/el-button/register');
-</script>
 
 ## Properties
 

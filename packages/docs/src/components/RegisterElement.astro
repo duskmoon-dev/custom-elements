@@ -1,0 +1,13 @@
+---
+/**
+ * Component to register custom elements in documentation pages.
+ * This avoids MDX parsing issues with inline script tags.
+ */
+interface Props {
+  element: string;
+}
+
+const { element } = Astro.props;
+---
+
+<Fragment set:html={`<script type="module">import('${element}/register');</script>`} />

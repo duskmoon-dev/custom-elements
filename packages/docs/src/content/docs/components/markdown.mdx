@@ -7,6 +7,9 @@ component: "@duskmoon-dev/el-markdown"
 ---
 
 import ComponentDemo from '../../../components/ComponentDemo.astro';
+import RegisterElement from '../../../components/RegisterElement.astro';
+
+<RegisterElement element="@duskmoon-dev/el-markdown" />
 
 # Markdown
 
@@ -44,9 +47,6 @@ import '@duskmoon-dev/el-markdown/register';
   <el-dm-markdown content="# Hello World\n\nThis is **bold** and *italic* text.\n\n- List item 1\n- List item 2\n- List item 3" style="width: 100%; max-width: 500px;"></el-dm-markdown>
 </ComponentDemo>
 
-<script>
-  import('@duskmoon-dev/el-markdown/register').then(m => m.register());
-</script>
 
 ## Properties
 

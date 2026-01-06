@@ -10,7 +10,7 @@ export default new Map([
 ["src/content/docs/components/dialog.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fdocs%2Fcomponents%2Fdialog.mdx&astroContentModuleFlag=true")],
 ["src/content/docs/components/input.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fdocs%2Fcomponents%2Finput.mdx&astroContentModuleFlag=true")],
 ["src/content/docs/components/markdown.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fdocs%2Fcomponents%2Fmarkdown.mdx&astroContentModuleFlag=true")],
-["src/content/docs/components/progress.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fdocs%2Fcomponents%2Fprogress.mdx&astroContentModuleFlag=true")],
 ["src/content/docs/components/switch.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fdocs%2Fcomponents%2Fswitch.mdx&astroContentModuleFlag=true")],
+["src/content/docs/components/progress.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fdocs%2Fcomponents%2Fprogress.mdx&astroContentModuleFlag=true")],
 ["src/content/docs/components/tooltip.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fdocs%2Fcomponents%2Ftooltip.mdx&astroContentModuleFlag=true")]]);
 		
