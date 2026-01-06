@@ -14,6 +14,11 @@ const { title, description, currentPath = Astro.url.pathname } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description}>
+  <!-- Register all custom elements for demos -->
+  <script>
+    import '../scripts/register-elements';
+  </script>
+
   <div class="docs-container">
     <header class="docs-header">
       <div class="header-content">
