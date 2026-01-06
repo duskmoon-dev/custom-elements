@@ -62,7 +62,9 @@ const styles = css`
     justify-content: center;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 200ms ease, visibility 200ms ease;
+    transition:
+      opacity 200ms ease,
+      visibility 200ms ease;
   }
 
   .dialog-wrapper.open {
@@ -95,9 +97,15 @@ const styles = css`
     transform: scale(1);
   }
 
-  .dialog-sm { max-width: 400px; }
-  .dialog-lg { max-width: 800px; }
-  .dialog-xl { max-width: 1140px; }
+  .dialog-sm {
+    max-width: 400px;
+  }
+  .dialog-lg {
+    max-width: 800px;
+  }
+  .dialog-xl {
+    max-width: 1140px;
+  }
   .dialog-fullscreen {
     max-width: 100vw;
     max-height: 100vh;
@@ -141,7 +149,9 @@ const styles = css`
     cursor: pointer;
     color: var(--color-on-surface);
     opacity: 0.7;
-    transition: opacity 150ms ease, background-color 150ms ease;
+    transition:
+      opacity 150ms ease,
+      background-color 150ms ease;
   }
 
   .dialog-close:hover {

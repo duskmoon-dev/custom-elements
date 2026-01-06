@@ -65,7 +65,9 @@ const styles = css`
     white-space: nowrap;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 150ms ease, visibility 150ms ease;
+    transition:
+      opacity 150ms ease,
+      visibility 150ms ease;
     pointer-events: none;
     font-family: inherit;
   }

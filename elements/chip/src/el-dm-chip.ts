@@ -50,7 +50,14 @@ const SIZE_CLASSES: Record<string, string> = {
 };
 
 export type ChipVariant = 'filled' | 'outlined' | 'soft';
-export type ChipColor = 'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'error' | 'info';
+export type ChipColor =
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'success'
+  | 'warning'
+  | 'error'
+  | 'info';
 export type ChipSize = 'sm' | 'md' | 'lg';
 
 // Strip @layer wrapper for Shadow DOM compatibility

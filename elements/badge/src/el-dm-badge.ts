@@ -43,7 +43,14 @@ const SIZE_CLASSES: Record<string, string> = {
 };
 
 export type BadgeVariant = 'filled' | 'outlined' | 'soft';
-export type BadgeColor = 'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'error' | 'info';
+export type BadgeColor =
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'success'
+  | 'warning'
+  | 'error'
+  | 'info';
 export type BadgeSize = 'sm' | 'md' | 'lg';
 
 // Strip @layer wrapper for Shadow DOM compatibility

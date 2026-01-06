@@ -39,7 +39,14 @@ const SIZE_CLASSES: Record<string, string> = {
   lg: 'progress-lg',
 };
 
-export type ProgressColor = 'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'error' | 'info';
+export type ProgressColor =
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'success'
+  | 'warning'
+  | 'error'
+  | 'info';
 export type ProgressSize = 'sm' | 'md' | 'lg';
 
 // Strip @layer wrapper for Shadow DOM compatibility

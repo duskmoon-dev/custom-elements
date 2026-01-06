@@ -174,7 +174,8 @@ export class ElDmSwitch extends BaseElement {
 
   render(): string {
     const switchClasses = this._getSwitchClasses();
-    const labelClass = this.labelPosition === 'left' ? 'switch-label switch-label-left' : 'switch-label';
+    const labelClass =
+      this.labelPosition === 'left' ? 'switch-label switch-label-left' : 'switch-label';
 
     return `
       <label class="${switchClasses}" part="switch">
